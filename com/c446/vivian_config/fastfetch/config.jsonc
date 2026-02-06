@@ -1,0 +1,101 @@
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "logo": {
+        "source": "~/.config/fastfetch/yixuan_fast_fetch.png",
+        "type": "kitty",
+    	    "height": 19,
+        "padding": {
+            "top": 1,
+            "right": 2,
+            "bottom": 1
+        }
+    },
+    "display": {
+        "separator": " ➤ "
+    },
+    "modules": [
+        "break",
+        {
+            "type": "os",
+            "key": "OS 󰣭 ",
+            "keyColor": "#A9DC76",
+            "format": "CachyOS"
+        },
+        {
+            "type": "kernel",
+            "key": " ├  ",
+            "keyColor": "#A9DC76"
+        },
+        {
+            "type": "packages",
+            "format": "{} (pacman)",
+            "key": " ├  ",
+            "keyColor": "#A9DC76"
+        },
+        {
+            "type": "shell",
+            "key": " └  ",
+            "keyColor": "#A9DC76"
+        },
+        "break",
+        {
+            "type": "wm",
+            "key": "WM  ",
+            "keyColor": "#FCFCFA"
+        },
+        {
+            "type": "terminal",
+            "key": " ├  ",
+            "keyColor": "#FCFCFA"
+        },
+        {
+            "type": "uptime",
+            "key": " └  ",
+            "keyColor": "#FCFCFA"
+        },
+        "break",
+        {
+            "type": "host",
+            "format": "{5} {1} Type {2}",
+            "key": "PC 󰍹 ",
+            "keyColor": "#FFB900"
+        },
+        {
+            "type": "cpu",
+            "key": " ├  ",
+            "keyColor": "#FFB900"
+        },
+        {
+            "type": "gpu",
+            "index": 0,
+            "key": " ├ 󰢮 ",
+            "keyColor": "#FFB900"
+        },
+        {
+            "type": "memory",
+            "key": " ├  ",
+            "keyColor": "#FFB900"
+        },
+        {
+            "type": "disk",
+            "key": " ├ 󰋊 ",
+            "keyColor": "#FFB900"
+        },
+        {
+            "type": "monitor",
+            "key": " └  ",
+            "keyColor": "#FFB900"
+        },
+        "break",
+        {
+            "type": "media",
+            "key": "♪",
+            "keyColor": "#FF6188"
+        },
+        {
+            "type": "player",
+            "key": "󰋋",
+            "keyColor": "#FF6188"
+        }
+    ]
+}

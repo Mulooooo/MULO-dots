@@ -1,0 +1,10 @@
+{
+    "colors": [
+        "#595A96", //main bg
+        "#A4A5C7", //lighter bg
+        "#EFEFF8", //font
+        "#D2C8E3", //darker font
+        "#B5A0CE" // accent
+    ],
+    "code_ext" : "Lavender-Studio.theme-lavender-dreams"
+}
