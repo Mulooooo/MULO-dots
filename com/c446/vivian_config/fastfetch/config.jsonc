@@ -3,7 +3,7 @@
     "logo": {
         "source": "~/.config/fastfetch/yixuan_fast_fetch.png",
         "type": "kitty",
-    	    "height": 19,
+        "height": 19,
         "padding": {
             "top": 1,
             "right": 2,
@@ -18,7 +18,7 @@
         {
             "type": "os",
             "key": "OS 󰣭 ",
-            "keyColor": "#A9DC76",
+            "keyColor": "#A9DC76", // Green (Functions/Added)
             "format": "CachyOS"
         },
         {
@@ -41,56 +41,56 @@
         {
             "type": "wm",
             "key": "WM  ",
-            "keyColor": "#FCFCFA"
+            "keyColor": "#F2F2F2" // Text-1 (Foreground)
         },
         {
             "type": "terminal",
             "key": " ├  ",
-            "keyColor": "#FCFCFA"
+            "keyColor": "#F2F2F2"
         },
         {
             "type": "uptime",
             "key": " └  ",
-            "keyColor": "#FCFCFA"
+            "keyColor": "#F2F2F2"
         },
         "break",
         {
             "type": "host",
             "format": "{5} {1} Type {2}",
             "key": "PC 󰍹 ",
-            "keyColor": "#FFB900"
+            "keyColor": "#B7A6F6" // Accent-1 (Iris Purple)
         },
         {
             "type": "cpu",
             "key": " ├  ",
-            "keyColor": "#FFB900"
+            "keyColor": "#B7A6F6"
         },
         {
             "type": "gpu",
             "index": 0,
             "key": " ├ 󰢮 ",
-            "keyColor": "#FFB900"
+            "keyColor": "#B7A6F6"
         },
         {
             "type": "memory",
             "key": " ├  ",
-            "keyColor": "#FFB900"
+            "keyColor": "#B7A6F6"
         },
         {
             "type": "disk",
             "key": " ├ 󰋊 ",
-            "keyColor": "#FFB900"
+            "keyColor": "#B7A6F6"
         },
         {
             "type": "monitor",
             "key": " └  ",
-            "keyColor": "#FFB900"
+            "keyColor": "#B7A6F6"
         },
         "break",
         {
             "type": "media",
             "key": "♪",
-            "keyColor": "#FF6188"
+            "keyColor": "#FF6188" // Red (Tags/Errors)
         },
         {
             "type": "player",

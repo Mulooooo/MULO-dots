@@ -1,0 +1,3 @@
+# Manual Install Required
+
+## [Firefox Colors](https://color.firefox.com/?theme=XQAAAAIaAQAAAAAAAABBKYhm849SCia2CaaEGccwS-xMDPr79BBHo_jMphiJTjp51F-jB4qcSiulUwFm_hfWct7dMMHmD4rX5Wbd3s9h5mmxiKvWvzj80SL1RsEbrnDNpkas7rNcJ1Mo7ZjHV7-t5Hfz6cWTU_lyinx7TRtiAdfa5NNOzOHuga1poyRrpTgdDsvUmHUaTYzlE4DlKm0BAoBQvbFJdALtVIWG87dA8fnQyw2y_YKZYw1f3nJ5Eb77Ifmypfg)

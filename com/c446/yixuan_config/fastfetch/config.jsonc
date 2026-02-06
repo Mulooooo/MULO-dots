@@ -19,7 +19,7 @@
             "type": "os",
             "key": "OS 󰣭 ",
             "keyColor": "#A9DC76",
-            "format": "Linux Mint"
+            "format": "CachyOS"
         },
         {
             "type": "kernel",
@@ -28,7 +28,7 @@
         },
         {
             "type": "packages",
-            "format": "{} (apt)",
+            "format": "{} (pacman)",
             "key": " ├  ",
             "keyColor": "#A9DC76"
         },
