@@ -1,39 +1,41 @@
 source /usr/share/cachyos-fish-config/cachyos-config.fish
 alias spotify="~/.cargo/bin/spotify_player"
-# overwrite greeting
-# potentially disabling fastfetch
-#function fish_greeting
-#    # smth smth
-#end
 
 function fish_greeting
-    # Get all images into an array
+    # Get all files in the directory
     set -l images ~/Pictures/fastfetch_assets/*
-    
-    # Get a random index
-    set -l count (count $images)
-    set -l random_index (random 1 $count)
-    
-    # Select the random image
-    set -l random_img $images[$random_index]
-    
-    # Use a unique filename with timestamp to force kitty to reload
+
+    # Ensure at least one file exists
+    if test (count $images) -eq 0
+        /usr/bin/fastfetch
+        return
+    end
+
+    # Pick a random file
+    set -l random_img (random choice $images)
+
+    # Extract extension from selected file
+    set -l ext (string split -r -m1 . $random_img)[2]
+
+    # Unique filename
     set -l timestamp (date +%s%N)
-    set -l target_file ~/.config/fastfetch/fastfetch_cur_$timestamp.jpg
-    
-    # Remove old images
-    rm -f ~/.config/fastfetch/fastfetch_cur*.jpg
-    
-    # Copy the new random image with unique name
+    set -l target_file ~/.config/fastfetch/fastfetch_cur_$timestamp.$ext
+
+    # Remove old cached images (any extension)
+    rm -f ~/.config/fastfetch/fastfetch_cur_*
+
+    # Copy selected image
     cp $random_img $target_file
-    
-    # Create/update symlink
-    ln -sf $target_file ~/.config/fastfetch/fastfetch_cur.jpg
-    
+
+    # Update symlink
+    ln -sf $target_file ~/.config/fastfetch/fastfetch_cur.$ext
+    ln -sf ~/.config/fastfetch/fastfetch_cur.$ext ~/.config/fastfetch/fastfetch_cur
+
     # Run fastfetch
     /usr/bin/fastfetch
 end
 
-#random_fetch
-
 alias fastfetch=fish_greeting
+alias fclear="/sbin/clear"
+alias clear="clear && fish_greeting"
+alias restartSound="systemctl --user restart pipewire pipewire-pulse wireplumber"

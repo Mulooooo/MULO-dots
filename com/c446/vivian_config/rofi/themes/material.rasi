@@ -1,0 +1,133 @@
+/*
+ * ROFI color theme: VIVIAN / IRIS BLEND (JetBrains Mono Edition)
+ */
+
+* {
+    /* Backgrounds: Shifted from Slate-Blue to Deep-Violet */
+    base00: hsl(269, 20%, 15%);    /* Deepest Purple (VIVIAN Background) */
+    base01: hsl(269, 20%, 20%);    /* Kitty Dark Purple (Surface) */
+    base02: hsl(269, 20%, 25%);    /* Lighter Purple (Hover/Selection) */
+    base03: #625a7c;    /* Muted Lavender (Inactive/Comments) */
+
+    /* Content: Removed the "icy" Material tones for "warm" Lavender */
+    base04: #9992b0;    /* Main Foreground */
+    base05: #b2a4bc;    /* Soft Lavender-Gray */
+    base06: #dcd2fe;    /* Bright Iris-White */
+    base07: #efebff;    /* Purest Lavender-Highlight */
+
+    /* Accents: Punchy Iris & Magenta */
+    base08: #ff6188;    /* Red (Vivian Pink) */
+    base09: #ffd866;    /* Orange/Gold */
+    base0A: #ecd1ff;    /* Yellow (Pale Violet) */
+    base0B: #a9dc76;    /* Green (Hiberbee) */
+    base0C: #78dce8;    /* Cyan (Iris Sky) */
+    base0D: #b5a0fe;    /* PRIMARY IRIS (Selection/Links) */
+    base0E: #d294ff;    /* SECONDARY IRIS (Magenta/Accent) */
+    base0F: #e65577;    /* Deep Rose */
+
+    spacing: 0;
+    background-color: @base00;
+    
+    /* UPDATED: JetBrains Mono Font */
+    /* Adjust '12' to your preferred size. 'Medium' weight looks great for TUI vibes */
+    font: "MesloLGL Nerd Font Mono Medium 15";
+}
+
+window {
+    /* Remove the 'CC' - use the solid Vivian background */
+    background-color: #1a1025; 
+    border: 2px;
+    border-color: @base0D;
+}
+
+mainbox {
+    children: [inputbar, message, mode-switcher, listview];
+    spacing: 20px;
+    padding: 30px;
+}
+
+inputbar {
+    padding: 0 0 10px 0;
+    children: [prompt, textbox-prompt-colon, entry, case-indicator];
+}
+
+prompt {
+    text-color: @base0D;
+}
+
+textbox-prompt-colon {
+    expand: false;
+    str: ":";
+    margin: 0 1ch 0 0;
+    text-color: @base0D;
+}
+
+entry {
+    text-color: @base07;
+    placeholder: "Search Apps...";
+    placeholder-color: @base03;
+}
+
+case-indicator {
+    text-color: @base0F;
+}
+
+mode-switcher, message {
+    border: 1px 0;
+    border-color: @base0D;
+}
+
+button, textbox {
+    background-color: @base03;
+    text-color: @base07;
+    padding: 5px;
+}
+
+button selected {
+    background-color: @base0D;
+    text-color: @base00;
+}
+
+listview {
+    scrollbar: true;
+    margin: 10px 0 0 0;
+    fixed-height: 0;
+    lines: 10; /* Limits height for a cleaner look */
+}
+
+scrollbar {
+    background-color: @base03;
+    handle-color: @base0D;
+    handle-width: 4px;
+    margin: 0 0 0 10px;
+}
+
+element {
+    padding: 10px;
+    spacing: 15px;
+    border-radius: 4px; /* Matches your GTK "Softness" */
+    children: [element-icon, element-text];
+}
+
+element selected {
+    background-color: @base0D;
+    text-color: @base00;
+}
+
+element-text, element-icon {
+    background-color: inherit;
+    text-color:       inherit;
+    vertical-align:   0.5;
+}
+
+element normal normal, element alternate normal {
+    text-color: @base07;
+}
+
+element normal urgent, element selected urgent, element alternate urgent {
+    text-color: @base0F;
+}
+
+element normal active, element selected active, element alternate active {
+    text-color: @base0B;
+}

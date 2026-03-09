@@ -1,22 +1,13 @@
-#  __  __ _   _ _     ___  _           _       _
-# |  \/  | | | | |   / _ \( )___    __| | ___ | |_ ___
-# | |\/| | | | | |  | | | |// __|  / _` |/ _ \| __/ __|
-# | |  | | |_| | |__| |_| | \__ \ | (_| | (_) | |_\__ \
-# |_|  |_|\___/|_____\___/  |___/  \__,_|\___/ \__|___/
+# i3 Configuration
 
-## === [ MOD ET FONT ] === ##
+# === BASIC SETTINGS ===
 set $mod Mod4
 floating_modifier $mod
-font pango:Monospace 15
+font Monospace 15
 
-## === [ VARIABLES UTILES ] === ##
-set $HDMI-1-0
-set $screen2 eDP
-set $wallpaper $HOME/Pictures/yixuan_bg_2.png
-#set $feh_restore feh --bg-scale --randomize --slideshow-delay 300 ~/wallpapers/*
-set $feh_restore feh --bg-fill $wallpaper
-
-# Workspaces
+# === VARIABLES ===
+set $screen HDMI-1-0
+set $screen2 eDP-1
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -27,63 +18,69 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
-set $vivian_bg_1 = $HOME/Pictures/vivian_bg_1.jpg
-set $vivian_bg_2 = $HOME/Pictures/vivian_bg_2.jpg
+set $python_env $HOME/Documents/Github/SI--/.venv/bin/activate
+set $SIPP $HOME/Documents/Github/SI--/SI.py
 
+# Wallpapers
+set $wallpaper_vivian1 $HOME/Pictures/vivian_bg_1.jpg
+set $wallpaper_vivian2 $HOME/Pictures/vivian_bg_2.jpg
+set $wallpaper_win $HOME/Pictures/bg_win.jpg
 
-## === [ LANCEMENT AUTOMATIQUE ] === ##
+# === AUTOSTART ===
 exec --no-startup-id setxkbmap fr
+exec --no-startup-id xset s off
+exec --no-startup-id xset -dpms
+exec --no-startup-id xset s noblank
 exec_always --no-startup-id xrandr --rate 60
 exec_always --no-startup-id picom --config $HOME/.config/picom/picom.conf &
 exec_always --no-startup-id mpd &
 exec_always --no-startup-id dunst &
 exec_always --no-startup-id pgrep -x polybar || polybar &
 exec_always --no-startup-id battery &
-exec_always --no-startup-id feh --bg-fill $vivian_bg_1
 exec_always --no-startup-id sudo update-alternatives --config x-cursor-theme
 exec_always --no-startup-id gsettings set org.gnome.desktop.interface cursor-size 48
-
-
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 exec --no-startup-id ~/.config/i3/battery_warning.sh
 exec --no-startup-id light -I
 exec vesktop
 
-## === [ RÈGLES SPÉCIALES ] === ##
+# === WINDOW RULES ===
 for_window [class="numworks-omega"] floating enable
 for_window [class="steam_app_0"] fullscreen enable
-
-## === [ APPEARANCES ] === ##
-
-# class                 border      background  text      indicator
-client.focused          #C0AAFF     #C0AAFF     #1A1A1A   #AB9DF2
-client.unfocused        #403E5C     #403E5C     #8C8C8C   #403E5C
-client.focused_inactive #4F4364     #4F4364     #D1D1D1   #4F4364
-client.urgent           #FF6188     #FF6188     #F2F2F2   #FF6188
-
-
 for_window [class=".*"] border pixel 2
+
+# === APPEARANCE ===
+client.focused          #C0AAFF #C0AAFF #1A1A1A #AB9DF2
+client.unfocused        #403E5C #403E5C #8C8C8C #403E5C
+client.focused_inactive #4F4364 #4F4364 #D1D1D1 #4F4364
+client.urgent           #FF6188 #FF6188 #F2F2F2 #FF6188
+
+assign [class="firefox"] 1
+assign [class="vesktop"] 2
+assign [class="Code"] 3
+assign [class="Spotify"] 4
+
+gaps inner 8
+gaps outer 0
+gaps top -8
 
 bar {
     mode invisible
     tray_output none
 }
 
-bindsym $mod+Shift+Tab workspace prev
-bindsym $mod+Tab workspace next
-# Gaps
-gaps inner 8
-gaps outer 0
-gaps top -8
+# === KEY BINDINGS ===
 
-## === [ TOUCHES DE CONTRÔLE - BASIQUES ] === ##
+# Basic controls
 bindsym $mod+Return exec kitty
 bindsym $mod+Shift+c kill
 bindsym $mod+l exec i3lock-fancy
 bindsym $mod+e exec thunar
+bindsym $mod+s exec --no-startup-id rofi -show drun
+bindsym $mod+a exec --no-startup-id rofi -show window
 
-## === [ DÉPLACEMENT DU FOCUS ] === ##
+# Focus movement
 bindsym $mod+j focus left
 bindsym $mod+k focus down
 bindsym $mod+semicolon focus right
@@ -92,7 +89,7 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-## === [ MOUVEMENT DES FENÊTRES ] === ##
+# Window movement
 bindsym $mod+Shift+j move left
 bindsym $mod+Shift+k move down
 bindsym $mod+Shift+l move up
@@ -102,39 +99,9 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# Raccourcis HDMI personnalisés
-#bindsym Ctrl+F7 exec brightness_hdmi down
-#Tbindsym Ctrl+F8 exec brightness_hdmi up
-
-# Écran
-#bindsym XF86ScreenSaver exec xset dpms force off
-
-# Écran externe
-set $screen HDMI-1-0
-set $screen2 eDP-1
-
-# Écran externe
-# duplicate screen
-bindsym $mod+m exec --no-startup-id \
-    xrandr --setprovideroutputsource 1 0 && \
-    xrandr --output eDP-1 --primary --mode 2560x1600 --pos 0x0 --rotate normal \
-           --output HDMI-1-0 --mode 1920x1080 --right-of eDP-1 --rotate normal
-bindsym $mod+n exec --no-startup-id xrandr --setprovideroutputsource 1 0 && xrandr --output $screen --rotate normal --output $screen2 --rotate normal --rate 60 # && feh --no-fehbg --bg-fill $wallpaper NO WALLPAPER !
-
-bindsym $mod+Shift+m exec --no-startup-id \
-    xrandr --output eDP-1 --auto --output HDMI-1-0 --auto --same-as eDP-1
-
-## === [ MODES ET LAYOUTS ] === ##
-bindsym $mod+h split h
-bindsym $mod+v split v
-bindsym $mod+f fullscreen toggle
-bindsym $mod+Shift+q layout stacking
-bindsym $mod+Shift+a layout toggle split
-bindsym $mod+Shift+space floating toggle
-bindsym $mod+space focus mode_toggle
-
-## === [ WORKSPACES ] === ##
-# Navigation
+# Workspace navigation
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
 bindsym $mod+3 workspace number $ws3
@@ -146,7 +113,7 @@ bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
 
-# Déplacement de conteneur
+# Move to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
 bindsym $mod+Shift+2 move container to workspace number $ws2
 bindsym $mod+Shift+3 move container to workspace number $ws3
@@ -158,9 +125,79 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
-bindsym $mod+w move workspace to output right
+# Layout controls
+bindsym $mod+h split h
+bindsym $mod+v split v
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+q layout stacking
+bindsym $mod+Shift+a layout toggle split
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
 
-## === [ RESIZE MODE ] === ##
+# Custom Python scripts
+bindsym $mod+w exec --no-startup-id source $python_env && python $SIPP --mode text
+bindsym $mod+x exec --no-startup-id source $python_env && python $SIPP --mode set_start
+bindsym $mod+c exec --no-startup-id source $python_env && python $SIPP --mode vision
+
+# Display management
+bindsym $mod+m exec --no-startup-id xrandr --setprovideroutputsource 1 0 && xrandr --output eDP-1 --primary --mode 2560x1600 --pos 0x0 --rotate normal --output HDMI-1-0 --mode 1920x1080 --right-of eDP-1 --rotate normal
+bindsym $mod+Shift+m exec --no-startup-id xrandr --output eDP-1 --auto --output HDMI-1-0 --auto --same-as eDP-1
+bindsym $mod+Shift+b exec --no-startup-id xrandr --setprovideroutputsource 1 0 && xrandr --output $screen --rotate left --output $screen2 --rotate left
+bindsym $mod+Shift+v exec --no-startup-id xrandr --setprovideroutputsource 1 0 && xrandr --output $screen --rotate right --output $screen2 --rotate right
+
+# Wallpaper switching
+bindsym $mod+b exec --no-startup-id feh --bg-fill $wallpaper_vivian1
+bindsym $mod+Shift+w exec --no-startup-id feh --bg-fill $wallpaper_win
+
+# Screenshots
+bindsym $mod+Shift+s exec ~/screenshot.sh
+bindsym Print exec flameshot gui
+
+# Polybar
+bindsym $mod+p exec polybar -c /etc/polybar/config.ini
+bindsym $mod+o exec killall -q polybar
+
+# Audio
+bindsym XF86AudioRaiseVolume exec --no-startup-id bash -c 'pactl set-sink-volume @DEFAULT_SINK@ +5% && ~/.config/i3/notify-volume.sh'
+bindsym XF86AudioLowerVolume exec --no-startup-id bash -c 'pactl set-sink-volume @DEFAULT_SINK@ -5% && ~/.config/i3/notify-volume.sh'
+bindsym XF86AudioMute exec --no-startup-id bash -c 'pactl set-sink-mute @DEFAULT_SINK@ toggle && ~/.config/i3/notify-volume.sh'
+
+# Brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id bash -c 'brightnessctl set +5% && ~/.config/i3/notify-brightness.sh'
+bindsym XF86MonBrightnessDown exec --no-startup-id bash -c 'brightnessctl set 5%- && ~/.config/i3/notify-brightness.sh'
+bindsym Ctrl+F7 exec brightness_hdmi down
+bindsym Ctrl+F8 exec brightness_hdmi up
+
+# Screen
+bindsym XF86ScreenSaver exec xset dpms force off
+
+# Terminal shortcuts
+bindsym Ctrl+F1 exec --no-startup-id alacritty
+bindsym Ctrl+F5 exec --no-startup-id kitty
+bindsym Ctrl+F2 exec --no-startup-id dmenu_run
+
+# Power profiles
+bindsym $mod+F1 exec --no-startup-id systemctl start platform-profile@performance
+bindsym $mod+F2 exec --no-startup-id systemctl start platform-profile@quiet
+bindsym $mod+F3 exec --no-startup-id systemctl start platform-profile@auto
+
+# Microphone
+bindsym Ctrl+F3 exec amixer set Capture nocap && dunstify -a "Microphone" "Microphone" "Microphone is muted" -r 100 -i /usr/local/bin/icons/mic-off.svg
+bindsym Ctrl+F4 exec amixer set Capture cap && dunstify -a "Microphone" "Microphone" "Microphone is unmuted" -r 100 -i /usr/local/bin/icons/mic.svg
+
+# Touchpad
+bindsym Ctrl+F9 exec xinput set-prop $(xinput list | grep -oP 'Touchpad.*id=\K\d+') "Device Enabled" 0 && dunstify -a "Touchpad" "Touchpad" "Touchpad is disabled" -r 100
+bindsym Ctrl+F10 exec xinput set-prop $(xinput list | grep -oP 'Touchpad.*id=\K\d+') "Device Enabled" 1 && dunstify -a "Touchpad" "Touchpad" "Touchpad is enabled" -r 100
+
+# i3 session management
+bindsym $mod+t exec --no-startup-id i3-resurrect restore
+bindsym $mod+y exec --no-startup-id i3-resurrect save
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# === MODES ===
+
+# Resize mode
 mode "resize" {
     bindsym j resize shrink width 10 px or 10 ppt
     bindsym k resize grow height 10 px or 10 ppt
@@ -176,7 +213,7 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-## === [ GAPS MODE ] === ##
+# Gaps modes
 set $mode_gaps Gaps: (o) outer, (i) inner
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
 set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
@@ -188,6 +225,7 @@ mode "$mode_gaps" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
+
 mode "$mode_gaps_inner" {
     bindsym plus gaps inner current plus 5
     bindsym minus gaps inner current minus 5
@@ -198,6 +236,7 @@ mode "$mode_gaps_inner" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
+
 mode "$mode_gaps_outer" {
     bindsym plus gaps outer current plus 5
     bindsym minus gaps outer current minus 5
@@ -208,66 +247,3 @@ mode "$mode_gaps_outer" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-
-## === [ ROFI & UTILITAIRES ] === ##
-bindsym $mod+s exec --no-startup-id rofi -show drun
-bindsym $mod+a exec --no-startup-id rofi -show window 
-
-bindsym $mod+Shift+s exec ~/screenshot.sh
-bindsym Print exec flameshot gui
-
-## === [ POLYBAR ] === ##
-bindsym $mod+p exec polybar -c /etc/polybar/config.ini
-bindsym $mod+o exec killall -q polybar
-
-## === [ AUDIO / LUMIÈRE / ÉCRAN ] === ##
-
-# Volume
-bindsym XF86AudioRaiseVolume exec --no-startup-id bash -c 'pactl set-sink-volume @DEFAULT_SINK@ +5% && ~/.config/i3/notify-volume.sh'
-bindsym XF86AudioLowerVolume exec --no-startup-id bash -c 'pactl set-sink-volume @DEFAULT_SINK@ -5% && ~/.config/i3/notify-volume.sh'
-bindsym XF86AudioMute exec --no-startup-id bash -c 'pactl set-sink-mute @DEFAULT_SINK@ toggle && ~/.config/i3/notify-volume.sh'
-
-# Luminosité
-bindsym XF86MonBrightnessUp exec --no-startup-id bash -c 'brightnessctl set +5% && ~/.config/i3/notify-brightness.sh'
-bindsym XF86MonBrightnessDown exec --no-startup-id bash -c 'brightnessctl set 5%- && ~/.config/i3/notify-brightness.sh'
-
-# Raccourcis HDMI personnalisés
-bindsym Ctrl+F7 exec brightness_hdmi down
-bindsym Ctrl+F8 exec brightness_hdmi up
-
-# Écran
-bindsym XF86ScreenSaver exec xset dpms force off
-
-# Rotation écran
-bindsym $mod+Shift+b exec --no-startup-id xrandr --setprovideroutputsource 1 0 && xrandr --output $screen --rotate left --output $screen2 --rotate left && $feh_restore
-bindsym $mod+Shift+v exec --no-startup-id xrandr --setprovideroutputsource 1 0 && xrandr --output $screen --rotate right --output $screen2 --rotate right && $feh_restore
-
-## === [ RACCOURCIS PERSO ] === ##
-bindsym Ctrl+F1 exec --no-startup-id alacritty
-bindsym Ctrl+F2 exec --no-startup-id dmenu_run
-bindsym Ctrl+F5 exec --no-startup-id kitty
-
-# Alienware power profiles (AWCC-style)
-bindsym $mod+F1 exec --no-startup-id systemctl start platform-profile@performance
-bindsym $mod+F2 exec --no-startup-id systemctl start platform-profile@quiet
-bindsym $mod+F3 exec --no-startup-id systemctl start platform-profile@auto
-# bindsym $mod+F3 exec --no-startup-id systemctl start platform-profile@performance
-
-
-# Microphone
-bindsym Ctrl+F3 exec amixer set Capture nocap && dunstify -a "Microphone" "Microphone" "Microphone is muted" -r 100 -i /usr/local/bin/icons/mic-off.svg
-bindsym Ctrl+F4 exec amixer set Capture cap && dunstify -a "Microphone" "Microphone" "Microphone is unmuted" -r 100 -i /usr/local/bin/icons/mic.svg
-
-# Touchpad
-bindsym Ctrl+F9 exec xinput set-prop $(xinput list | grep -oP 'Touchpad.*id=\K\d+') "Device Enabled" 0 && dunstify -a "Touchpad" "Touchpad" "Touchpad is disabled" -r 100
-bindsym Ctrl+F10 exec xinput set-prop $(xinput list | grep -oP 'Touchpad.*id=\K\d+') "Device Enabled" 1 && dunstify -a "Touchpad" "Touchpad" "Touchpad is enabled" -r 100
-
-## === [ SYSTÈME ] === ##
-# bindsym $mod+Shift+c reload
-bindsym $mod+Shift+r restart
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-
-# i3-resurrect
-bindsym $mod+t exec --no-startup-id i3-resurrect restore
-bindsym $mod+y exec --no-startup-id i3-resurrect save
-
