@@ -2,133 +2,100 @@
 
 set -e
 
-read -p "Enter your username: " USR
+# --- 1. Configuration & Setup ---
+read -p "Enter your username to install for: " USR
+
+if ! id "$USR" &>/dev/null; then
+    echo "❌ Error: User '$USR' does not exist."
+    exit 1
+fi
 
 USER_HOME="/home/$USR"
-CONFIG_DIR="$USER_HOME/.config"
-ICON_DIR="$USER_HOME/.icons"
+CONFIG="$USER_HOME/.config"
+ICONS="$USER_HOME/.icons"
+THEMES="$USER_HOME/.themes"
+PICS="$USER_HOME/Pictures"
 
-echo "Installing configuration for $USR..."
+echo "🚀 Installing Vivian-Rice (User-space Edition) for $USR..."
 
-# Create required directories
+# --- 2. The DRY Helper Function (Fixed for Assets & Configs) ---
+deploy() {
+    local src="$1"
+    local dest="$2"
+    local desc="$3"
 
-mkdir -p "$CONFIG_DIR"/{gtk-3.0,picom,i3,kitty,fastfetch,polybar,rofi,fish,vesktop/themes}
-mkdir -p "$ICON_DIR/default"
-mkdir -p "$USER_HOME/Pictures"
+    if [ -e "$src" ]; then
+        echo "  -> Deploying $desc..."
+        
+        if [ -d "$src" ]; then
+            # Ensure the destination folder exists
+            mkdir -p "$dest"
+            # Copy contents of src into dest
+            cp -r "$src/." "$dest/"
+        else
+            # It's a single file; ensure parent directory exists
+            mkdir -p "$(dirname "$dest")"
+            cp "$src" "$dest"
+        fi
+    else
+        echo "  ⚠️  Skipping $desc (Source not found: $src)"
+    fi
+}
 
-# -------------------------
+# --- 3. Resource Mapping ---
+# Note: For directories, $dest is the FOLDER where contents will live.
+# For files, $dest is the full PATH to the file.
+mappings=(
+    "./hypr:$CONFIG/hypr:Hyprland Core"
+    "./waybar:$CONFIG/waybar:Waybar"
+    "./kitty:$CONFIG/kitty:Kitty"
+    "./fish/config.fish:$CONFIG/fish/config.fish:Fish Shell"
+    "./fastfetch:$CONFIG/fastfetch:Fastfetch"
+    "./vesktop/themes:$CONFIG/vesktop/themes:Vesktop Styling"
+    "./assets/Pictures/Backgrounds:$PICS/Backgrounds:Wallpapers"
+    "./assets/Pictures/fastfetch_assets:$PICS/fastfetch_assets:Fastfetch Assets"
+)
 
-# GTK
+for entry in "${mappings[@]}"; do
+    IFS=":" read -r src dest desc <<< "$entry"
+    deploy "$src" "$dest" "$desc"
+done
 
-# -------------------------
+# --- 4. Assets & Themes ---
 
-cp ./gtk/settings.ini "$CONFIG_DIR/gtk-3.0/settings.ini"
+# Ensure scripts within the hypr directory are executable
+if [ -d "$CONFIG/hypr/scripts" ]; then
+    chmod +x "$CONFIG/hypr/scripts/"*.sh
+fi
 
-# install GTK themes system-wide
+# Cursors
+if [ -f "./gtk-3.0/Vivian-Cursors.zip" ]; then
+    echo "  -> Installing Cursors to ~/.icons..."
+    mkdir -p "$ICONS/default"
+    unzip -o ./gtk-3.0/Vivian-Cursors.zip -d "$ICONS/"
+    [ -f "./gtk-3.0/index.theme" ] && cp ./gtk-3.0/index.theme "$ICONS/default/index.theme"
+fi
 
-sudo mkdir -p /usr/share/themes
-sudo unzip -o ./gtk/gtk_themes.zip -d /usr/share/themes/
+# Oomox-Gigavolt GTK Theme
+if [ -f "./gtk-3.0/oomox-Gigavolt.zip" ]; then
+    echo "  -> Installing oomox-Gigavolt to ~/.themes..."
+    mkdir -p "$THEMES"
+    # This unzip creates the 'oomox-Gigavolt' folder inside ~/.themes
+    unzip -o ./gtk-3.0/oomox-Gigavolt.zip -d "$THEMES/"
+fi
 
-# install cursor theme
+# --- 5. Global Path Patching ---
+echo "  -> Patching hardcoded paths (/home/clement -> $USER_HOME)..."
+find "$CONFIG" -type f -not -path '*/.*' -exec sed -i "s|/home/clement|$USER_HOME|g" {} +
 
-unzip -o ./gtk/Vivian-Cursors.zip -d "$ICON_DIR/"
+# Force GTK3 apps to respect Light mode by default
+if [ -f "$CONFIG/gtk-3.0/settings.ini" ]; then
+    echo "  -> Forcing GTK3 to prefer-dark-theme = false..."
+    sed -i 's/gtk-application-prefer-dark-theme=true/gtk-application-prefer-dark-theme=false/g' "$CONFIG/gtk-3.0/settings.ini"
+fi
 
-# -------------------------
+# --- 6. Ownership ---
+echo "  -> Finalizing permissions..."
+chown -R "$USR:$USR" "$CONFIG" "$ICONS" "$THEMES" "$PICS"
 
-# i3
-
-# -------------------------
-
-cp ./i3/* "$CONFIG_DIR/i3/"
-
-# -------------------------
-
-# Picom
-
-# -------------------------
-
-cp ./picom/picom.conf "$CONFIG_DIR/picom/picom.conf"
-
-# -------------------------
-
-# Kitty
-
-# -------------------------
-
-cp ./kitty/* "$CONFIG_DIR/kitty/"
-
-KITTY_CONFIG="$CONFIG_DIR/kitty/kitty.conf"
-sed -i "s|/home/clement|$USER_HOME|g" "$KITTY_CONFIG"
-
-# -------------------------
-
-# Polybar
-
-# -------------------------
-
-cp ./polybar/config.ini "$CONFIG_DIR/polybar/config.ini"
-
-# -------------------------
-
-# Fastfetch
-
-# -------------------------
-
-cp ./fastfetch/config.jsonc "$CONFIG_DIR/fastfetch/config.jsonc"
-
-# -------------------------
-
-# Fish
-
-# -------------------------
-
-cp ./fish/config.fish "$CONFIG_DIR/fish/config.fish"
-
-# -------------------------
-
-# Rofi
-
-# -------------------------
-
-cp ./rofi/config.rasi "$CONFIG_DIR/rofi/config.rasi"
-cp -r ./rofi/themes "$CONFIG_DIR/rofi/"
-
-ROFI_CONFIG="$CONFIG_DIR/rofi/config.rasi"
-ROFI_THEME="$CONFIG_DIR/rofi/themes/material.rasi"
-
-# Replace /home/users with /home/clement
-sed -i "s|/home/clement|$USER_HOME|g" "$ROFI_CONFIG"
-
-# -------------------------
-
-# Vesktop
-
-# -------------------------
-
-cp ./vesktop/themes/sys-24-vivian.css "$CONFIG_DIR/vesktop/themes/"
-mkdir -p "$CONFIG_DIR/vesktop/themes/assets"
-cp ./vesktop/themes/assets/* "$CONFIG_DIR/vesktop/themes/assets/"
-
-# -------------------------
-
-# Wallpapers
-
-# -------------------------
-
-cp -r ./assets/Pictures/* "$USER_HOME/Pictures/"
-
-# -------------------------
-
-# Cursor default theme
-
-# -------------------------
-
-cp ./X/index.theme "$ICON_DIR/default/index.theme"
-
-# Fix permissions
-
-chown -R "$USR:$USR" "$USER_HOME/.config"
-chown -R "$USR:$USR" "$ICON_DIR"
-chown -R "$USR:$USR" "$USER_HOME/Pictures"
-
-echo "Installation complete!"
+echo "✅ Done! All assets (including backgrounds) are in the correct location for $USR."
