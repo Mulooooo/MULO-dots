@@ -1,0 +1,101 @@
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "logo": {
+        "source": "~/.config/fastfetch/fastfetch_cur",
+        "type": "kitty",
+        "height": 19,
+        "padding": {
+            "top": 1,
+            "right": 2,
+            "bottom": 1
+        }
+    },
+    "display": {
+        "separator": " ➤ "
+    },
+    "modules": [
+        "break",
+        {
+            "type": "os",
+            "key": "OS 󰣇 ",
+            "keyColor": "#A9DC76", // Green (Functions/Added)
+            "format": "CachyOS"
+        },
+        {
+            "type": "kernel",
+            "key": " ├  ",
+            "keyColor": "#A9DC76"
+        },
+        {
+            "type": "packages",
+            "format": "{} (pacman)",
+            "key": " ├  ",
+            "keyColor": "#A9DC76"
+        },
+        {
+            "type": "shell",
+            "key": " └  ",
+            "keyColor": "#A9DC76"
+        },
+        "break",
+        {
+            "type": "wm",
+            "key": "WM  ",
+            "keyColor": "#F2F2F2" // Text-1 (Foreground)
+        },
+        {
+            "type": "terminal",
+            "key": " ├  ",
+            "keyColor": "#F2F2F2"
+        },
+        {
+            "type": "uptime",
+            "key": " └  ",
+            "keyColor": "#F2F2F2"
+        },
+        "break",
+        {
+            "type": "host",
+            "format": "{5} {1} Type {2}",
+            "key": "PC 󰍹 ",
+            "keyColor": "#B7A6F6" // Accent-1 (Iris Purple)
+        },
+        {
+            "type": "cpu",
+            "key": " ├  ",
+            "keyColor": "#B7A6F6"
+        },
+        {
+            "type": "gpu",
+            "index": 0,
+            "key": " ├ 󰢮 ",
+            "keyColor": "#B7A6F6"
+        },
+        {
+            "type": "memory",
+            "key": " ├  ",
+            "keyColor": "#B7A6F6"
+        },
+        {
+            "type": "disk",
+            "key": " ├ 󰋊 ",
+            "keyColor": "#B7A6F6"
+        },
+        {
+            "type": "monitor",
+            "key": " └  ",
+            "keyColor": "#B7A6F6"
+        },
+        "break",
+        {
+            "type": "media",
+            "key": "♪",
+            "keyColor": "#FF6188" // Red (Tags/Errors)
+        },
+        {
+            "type": "player",
+            "key": "󰋋",
+            "keyColor": "#FF6188"
+        }
+    ]
+}

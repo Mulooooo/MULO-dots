@@ -1,0 +1,103 @@
+/* VIVIAN x Hyprland Sync - Harmonized */
+@define-color bg-base rgba(42, 30, 48, 0.65);
+@define-color bg-hover rgba(54, 38, 59, 0.9);
+@define-color active-border #C0AAFF;           
+@define-color inactive-border rgba(64, 62, 92, 0.4); 
+@define-color text-main #ffffff;
+@define-color text-dim rgba(255, 255, 255, 0.45);
+
+/* Refined "Lift" colors: Using solid colors with very low alpha to prevent muddy stacking */
+@define-color button-idle rgba(255, 255, 255, 0.05);
+@define-color button-active rgba(192, 170, 255, 0.15);
+
+* {
+    font-family: "MesloLGL Nerd Font Mono", monospace;
+    font-size: 13px;
+    border: none;
+    border-radius: 0;
+    box-shadow: none; /* Clean up button shadows */
+}
+
+window#waybar {
+    background: transparent;
+}
+
+/* Update your module block to this */
+#workspaces,
+#window,
+#mpris,
+#pulseaudio,
+#battery,
+#clock,
+#tray {
+    background: @bg-base;
+    color: @text-main;
+    /* top: 0, horizontal: 2px, bottom: 0 */
+    margin: 0 2px 0 2px; 
+    padding: 2px 14px;
+    border: 1px solid @inactive-border; 
+    transition: all 0.2s ease;
+}
+
+/* Edge Snap alignment */
+#workspaces { margin-left: 4px; border-radius: 0px 0 0 0px; }
+#tray { margin-right: 4px; border-radius: 0 0px 0px 0; }
+
+/* --- Workspace Button Styling (Anti-Stacking) --- */
+#workspaces button {
+    padding: 0 6px;
+    margin: 0px 2px 0px 2px; /* Remove bottom margin to prevent stacking */
+    background: @button-idle; /* Light tint rather than heavy rgba */
+    color: @text-dim;
+    border-radius: 0px;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+#workspaces button.active {
+    background: @button-active;
+    color: @active-border;
+    border: 1px solid rgba(192, 170, 255, 0.3);
+    /* Remove border-bottom to keep height consistent with idle buttons */
+}
+
+#workspaces button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: @text-main;
+    border-color: @active-border;
+}
+
+#workspaces button.urgent {
+    background: rgba(255, 97, 136, 0.2);
+    color: #FF6188;
+}
+
+/* --- Module Specifics --- */
+#clock {
+    font-weight: bold;
+    color: @active-border;
+}
+
+#mpris {
+    color: @active-border;
+    padding-right: 20px;
+}
+
+#pulseaudio:hover, #battery:hover, #clock:hover {
+    background: @bg-hover;
+    border-color: @active-border;
+}
+
+/* Visual identity for icons */
+#pulseaudio { color: #78DCE8; }
+#battery { color: #A9DC76; }
+#battery.critical { color: #FF6188; font-weight: bold; }
+
+/* --- Vivian / Media Applet Consistency --- */
+window#com.clement.mediactl {
+    background-color: @bg-base;
+    border: 2px solid @active-border;
+    border-radius: 0px;
+}
+
+#media-vbox { padding: 12px; }
