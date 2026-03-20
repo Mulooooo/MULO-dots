@@ -51,6 +51,7 @@ mappings=(
     "./kitty:$CONFIG/kitty:Kitty"
     "./fish/config.fish:$CONFIG/fish/config.fish:Fish Shell"
     "./fastfetch:$CONFIG/fastfetch:Fastfetch"
+    "./rofi:$CONFIG/rofi:Rofi"
     "./vesktop/themes:$CONFIG/vesktop/themes:Vesktop Styling"
     "./assets/Pictures/Backgrounds:$PICS/Backgrounds:Wallpapers"
     "./assets/Pictures/fastfetch_assets:$PICS/fastfetch_assets:Fastfetch Assets"
