@@ -7,20 +7,23 @@ WIN_BG="$BG_DIR/bg_win.jpg"
 
 # Define the file for the primary monitor based on input
 case $1 in
-    1) FILE="vivian_bg_1.jpg" ;;
-    2) FILE="vivian_bg_2.jpg" ;;
-    3) FILE="vivian_bg_3.png" ;;
-    4) FILE="vivian_bg_4.png" ;;
-    5) FILE="vivian_bg_5.mp4" ;;
-    6) FILE="bg_win.jpg";;
+    1) FILE="bg_win.jpg" ;;
+    2) FILE="vivian_bg_1.jpg" ;;
+    3) FILE="vivian_bg_2.jpg" ;;
+    4) FILE="vivian_bg_3.png" ;;
+    5) FILE="vivian_bg_4.png" ;;
+    6) FILE="vivian_bg_6.png" ;;
+    7) FILE="vivian_bg_7.jpg" ;;
+    8) FILE="vivian_bg_8.jpg" ;;
+    9) FILE="vivian_bg_9.jpg" ;;
     *) exit 1 ;;
 esac
 
 TARGET="$BG_DIR/$FILE"
 
 # Ensure swww-daemon is alive
-if ! pgrep -x "swww-daemon" > /dev/null; then
-    swww-daemon &
+if ! pgrep -x "awww-daemon" > /dev/null; then
+    awww-daemon &
     sleep 0.5
 fi
 
@@ -38,5 +41,5 @@ if [[ "$FILE" == *.mp4 ]]; then
 else
     # If switching back to an image, kill mpvpaper so the image underneath is visible
     pkill mpvpaper
-    swww img -o "$PRIMARY" "$TARGET" --transition-type wipe --transition-step 255 --transition-fps 240
+    awww img -o "$PRIMARY" "$TARGET" --transition-type wipe --transition-step 255 --transition-fps 240
 fi

@@ -1,0 +1,43 @@
+#!/usr/bin/env sh
+# File path for our temporary override
+REMOVE_TRANSP_CONF="/tmp/hypr_remove_transparency.conf"
+
+# Check if our override is currently active (1 = active/enabled)
+ACTIVE=$(hyprctl getoption animations:enabled | awk 'NR==1{print $2}')
+
+if [ "$ACTIVE" = "1" ]; then
+    # 1. Create a temporary config and embed the social_opacity file
+    cat <<EOF > "$REMOVE_TRANSP_CONF"
+animations {
+    enabled = 0
+}
+
+windowrule {
+    name = opacity-override
+    # Matches any class EXCEPT vesktop
+    match:class = negative:^(vesktop)$
+    opacity = 1.0 override 1.0 override 1.0 override
+    no_blur = on
+    force_rgbx = on
+    opaque = on
+}
+
+windowrule {
+    name = opacity-override-exempt
+    match:class = ^(vesktop)$
+    match:class = $social
+    no_blur= off
+    opaque= off
+    opacity = 0.85 override 0.7 override
+}
+
+# Embedded content from social_opacity.conf:
+$(cat "$HOME/.config/hypr/social_opacity.conf" 2>/dev/null || echo "# File not found")
+EOF
+
+   hyprctl keyword source "$REMOVE_TRANSP_CONF"
+else
+    # Remove the file and reload the main config to restore defaults
+    rm -f "$REMOVE_TRANSP_CONF"
+    hyprctl reload
+fi

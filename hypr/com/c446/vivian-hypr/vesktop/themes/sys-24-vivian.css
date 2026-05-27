@@ -394,6 +394,10 @@ body[style*="--background-image: off"],
     --background-image-on: none !important;
 }
 
+.inner_c0bea0{
+    border-radius: 0px !important;
+}
+
 #app-mount::before {
     content: "";
     position: fixed; /* Ensures it stays put during scrolls */

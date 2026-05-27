@@ -1,0 +1,33 @@
+#!/usr/bin/env sh
+
+REMOVE_TRANSP_CONF="/tmp/hypr_remove_transparency.conf"
+
+# Check if override is currently active (1 = animations on = override not yet applied)
+ACTIVE=$(hyprctl getoption animations:enabled | awk 'NR==1{print $2}')
+
+if [ "$ACTIVE" = "1" ]; then
+    cat <<EOF > "$REMOVE_TRANSP_CONF"
+
+$browser=^(firefox|chromium|brave|vivaldi|microsoft-edge)$
+animations {
+    enabled = 0
+}
+
+# Firefox is always opaque — no transparency, no blur
+windowrule {
+    name = temp-target-firefox
+    match:class = $browser
+    opacity = 1.0 override 1.0 override 1.0 override
+    no_blur = on
+    force_rgbx = on
+    opaque = on
+}
+
+# All other apps: transparent + blurred (sourced from social_opacity.conf)
+$(cat "$HOME/.config/hypr/social_opacity.conf" 2>/dev/null || echo "# social_opacity.conf not found")
+EOF
+    hyprctl keyword source "$REMOVE_TRANSP_CONF"
+else
+    rm -f "$REMOVE_TRANSP_CONF"
+    hyprctl reload
+fi
