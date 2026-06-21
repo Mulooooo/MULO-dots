@@ -106,13 +106,14 @@ bash "$COMMONS/hypr/scripts/apply-theme.sh" "$MANIFEST" || c_warn "apply-theme.s
 # Mount the theme's wallpapers into ~/Pictures/{Backgrounds,fastfetch_assets}
 # as per-file symlinks (no copying — avoids duplicating large videos/images).
 c_step "Wallpapers"
-mount_wall() { # <wallpapers-subdir>
-    local src="$TDIR/wallpapers/$1" dest="$HOME/Pictures/$1"
-    [ -d "$src" ] || return 0
+mount_wall() { # <wallpapers-subdir>  — mounts commons then theme (theme overlays)
+    local sub="$1" dest="$HOME/Pictures/$1" n=0 base
     mkdir -p "$dest"
-    local n=0
-    for f in "$src"/*; do
-        [ -e "$f" ] && ln -sfn "$f" "$dest/$(basename "$f")" && n=$((n+1))
+    for base in "$COMMONS/wallpapers/$sub" "$TDIR/wallpapers/$sub"; do
+        [ -d "$base" ] || continue
+        for f in "$base"/*; do
+            [ -e "$f" ] && ln -sfn "$f" "$dest/$(basename "$f")" && n=$((n+1))
+        done
     done
     c_ok "~/Pictures/$1 ($n file(s) mounted)"
 }

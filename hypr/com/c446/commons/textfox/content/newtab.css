@@ -23,6 +23,15 @@
     ) !important;
 
     --newtab-weather-background-color: transparent !important;
+
+    /* Force the textfox theme background instead of Firefox's built-in
+       newtab wallpaper/color (which was showing through as purple). */
+    --newtab-wallpaper-color: var(--tf-bg) !important;
+    --newtab-wallpaper-light: none !important;
+    --newtab-wallpaper-dark: none !important;
+    --newtab-background-color: var(--tf-bg) !important;
+    background-color: var(--tf-bg) !important;
+    background-image: none !important;
   }
 
   /* replace firefox logo */

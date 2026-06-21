@@ -29,7 +29,7 @@ fi
 
 # 1. Handle the Secondary Monitor (HDMI-A-1)
 # This keeps your "win_bg" persistent on the secondary monitor
-swww img -o "$SECONDARY" "$WIN_BG" --transition-type none
+awww img -o "$SECONDARY" "$WIN_BG" --transition-type none
 
 # 2. Handle the Primary Monitor (eDP-1)
 if [[ "$FILE" == *.mp4 ]]; then
