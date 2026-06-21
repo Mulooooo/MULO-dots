@@ -1,0 +1,17 @@
+# THEME: vivian — manifest read by theme-switch.sh / apply-theme.sh
+name        = "vivian"
+
+# GTK / icons / cursor (installed to ~/.themes and ~/.icons from gtk/*.zip)
+gtk_theme   = "oomox-Gigavolt"
+icon_theme  = "Yaru-prussiangreen"
+cursor      = "Vivian-Cursors"
+cursor_size = "24"
+font        = "MesloLGL Nerd Font Mono 20"
+
+# VS Code: extension id (installed via `code --install-extension`) + theme label
+vscode_ext   = "Lavender-Studio.theme-lavender-dreams"
+vscode_theme = "Lavender Dreams"
+
+# Wallpapers (relative to this theme's wallpapers/ dir, deployed to ~/Pictures)
+wallpaper_default = "vivian_bg_1.jpg"
+fastfetch_image   = "fastfetch_assets/vivian_v_bg_6.jpg"

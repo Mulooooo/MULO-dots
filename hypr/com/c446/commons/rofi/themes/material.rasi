@@ -1,41 +1,19 @@
 /*
- * ROFI color theme: VIVIAN / IRIS BLEND (JetBrains Mono Edition)
+ * ROFI layout: VIVIAN (JetBrains Mono Edition) — commons
+ * Palette (base00..base0F + window-bg) comes from the active theme's colors.rasi
  */
+@import "colors.rasi"
 
 * {
-    /* Backgrounds: Shifted from Slate-Blue to Deep-Violet */
-    base00: hsl(269, 20%, 15%);    /* Deepest Purple (VIVIAN Background) */
-    base01: hsl(269, 20%, 20%);    /* Kitty Dark Purple (Surface) */
-    base02: hsl(269, 20%, 25%);    /* Lighter Purple (Hover/Selection) */
-    base03: #625a7c;    /* Muted Lavender (Inactive/Comments) */
-
-    /* Content: Removed the "icy" Material tones for "warm" Lavender */
-    base04: #9992b0;    /* Main Foreground */
-    base05: #b2a4bc;    /* Soft Lavender-Gray */
-    base06: #dcd2fe;    /* Bright Iris-White */
-    base07: #efebff;    /* Purest Lavender-Highlight */
-
-    /* Accents: Punchy Iris & Magenta */
-    base08: #ff6188;    /* Red (Vivian Pink) */
-    base09: #ffd866;    /* Orange/Gold */
-    base0A: #ecd1ff;    /* Yellow (Pale Violet) */
-    base0B: #a9dc76;    /* Green (Hiberbee) */
-    base0C: #78dce8;    /* Cyan (Iris Sky) */
-    base0D: #b5a0fe;    /* PRIMARY IRIS (Selection/Links) */
-    base0E: #d294ff;    /* SECONDARY IRIS (Magenta/Accent) */
-    base0F: #e65577;    /* Deep Rose */
-
     spacing: 0;
     background-color: @base00;
-    
-    /* UPDATED: JetBrains Mono Font */
-    /* Adjust '12' to your preferred size. 'Medium' weight looks great for TUI vibes */
+
+    /* JetBrains Mono Font */
     font: "MesloLGL Nerd Font Mono Medium 15";
 }
 
 window {
-    /* Remove the 'CC' - use the solid Vivian background */
-    background-color: #1a1025; 
+    background-color: @window-bg;
     border: 2px;
     border-color: @base0D;
 }
