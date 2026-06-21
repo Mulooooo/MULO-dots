@@ -4,7 +4,7 @@ name        = "miyabi"
 # GTK / icons / cursor
 gtk_theme   = "Nightfox-Dark-Terafox"
 icon_theme  = "Yaru-prussiangreen"
-cursor      = "Adwaita"
+cursor      = "Miyabi-Cursors"
 cursor_size = "24"
 font        = "MesloLGL Nerd Font Mono 15"
 
