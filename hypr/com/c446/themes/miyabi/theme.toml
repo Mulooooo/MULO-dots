@@ -12,6 +12,6 @@ font        = "MesloLGL Nerd Font Mono 15"
 vscode_ext   = "EdenEast.nightfox"
 vscode_theme = "Terafox"
 
-# Wallpapers (relative to this theme's wallpapers/ dir, deployed to ~/Pictures)
+# Wallpapers — deployed to ~/Pictures/{Backgrounds,fastfetch_assets}
 wallpaper_default = "miyabi_bg_1.jpeg"
-fastfetch_image   = "miyabi_bg_1.jpeg"
+fastfetch_image   = "fastfetch_assets/miyabi_bg_1.jpeg"

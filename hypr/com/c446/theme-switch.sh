@@ -103,12 +103,25 @@ fi
 bash "$COMMONS/hypr/scripts/apply-theme.sh" "$MANIFEST" || c_warn "apply-theme.sh failed (gsettings/hyprctl unavailable?)"
 
 # --- 4. Wallpapers ------------------------------------------------------------
+# Mount the theme's wallpapers into ~/Pictures/{Backgrounds,fastfetch_assets}
+# as per-file symlinks (no copying — avoids duplicating large videos/images).
 c_step "Wallpapers"
-if [ -d "$TDIR/wallpapers" ]; then
-    mkdir -p "$HOME/Pictures"
-    cp -rf "$TDIR/wallpapers/." "$HOME/Pictures/" && c_ok "deployed wallpapers → ~/Pictures"
-    FF_IMG="$(toml_get fastfetch_image "$MANIFEST")"
-    [ -n "$FF_IMG" ] && [ -e "$HOME/Pictures/$FF_IMG" ] && ln -sfn "$HOME/Pictures/$FF_IMG" "$CONFIG/fastfetch/fastfetch_cur" 2>/dev/null
+mount_wall() { # <wallpapers-subdir>
+    local src="$TDIR/wallpapers/$1" dest="$HOME/Pictures/$1"
+    [ -d "$src" ] || return 0
+    mkdir -p "$dest"
+    local n=0
+    for f in "$src"/*; do
+        [ -e "$f" ] && ln -sfn "$f" "$dest/$(basename "$f")" && n=$((n+1))
+    done
+    c_ok "~/Pictures/$1 ($n file(s) mounted)"
+}
+mount_wall Backgrounds
+mount_wall fastfetch_assets
+FF_IMG="$(toml_get fastfetch_image "$MANIFEST")"
+if [ -n "$FF_IMG" ] && [ -e "$HOME/Pictures/$FF_IMG" ]; then
+    mkdir -p "$CONFIG/fastfetch"
+    ln -sfn "$HOME/Pictures/$FF_IMG" "$CONFIG/fastfetch/fastfetch_cur" && c_ok "fastfetch_cur → ~/Pictures/$FF_IMG"
 fi
 
 # --- 5. Vesktop (Discord) -----------------------------------------------------
