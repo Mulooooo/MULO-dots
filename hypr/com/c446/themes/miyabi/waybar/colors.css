@@ -1,0 +1,11 @@
+/* THEME: miyabi — Waybar palette (Terafox teal) */
+@define-color bg-base rgba(21, 37, 40, 0.65);      /* #152528 terafox bg */
+@define-color bg-hover rgba(37, 65, 71, 0.9);      /* #254147 terafox bg3 */
+@define-color active-border #4D9C9F;               /* i3 focus teal */
+@define-color inactive-border rgba(45, 79, 86, 0.4); /* #2d4f56 terafox bg4 */
+@define-color text-main #e6eaea;                   /* terafox fg */
+@define-color text-dim rgba(230, 234, 234, 0.45);
+
+/* Lift colors: low-alpha tints to prevent muddy stacking */
+@define-color button-idle rgba(230, 234, 234, 0.05);
+@define-color button-active rgba(77, 156, 159, 0.18);

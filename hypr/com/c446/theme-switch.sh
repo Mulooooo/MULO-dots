@@ -93,6 +93,13 @@ fi
 if [ -n "$CURS" ] && [ ! -d "$HOME/.icons/$CURS" ]; then
     for z in "$TDIR"/gtk/*Cursor*.zip "$TDIR"/gtk/*ursor*.zip; do [ -e "$z" ] && unzip -oq "$z" -d "$HOME/.icons/"; done
 fi
+# Make the active cursor the system default so Xwayland apps (e.g. Spotify)
+# stop falling back to the wrong/big X cursor. This is the canonical fix.
+if [ -n "$CURS" ]; then
+    mkdir -p "$HOME/.icons/default"
+    printf '[Icon Theme]\nName=Default\nComment=Active c446 cursor\nInherits=%s\n' "$CURS" > "$HOME/.icons/default/index.theme"
+    c_ok "~/.icons/default inherits $CURS (Xwayland/Spotify cursor fix)"
+fi
 bash "$COMMONS/hypr/scripts/apply-theme.sh" "$MANIFEST" || c_warn "apply-theme.sh failed (gsettings/hyprctl unavailable?)"
 
 # --- 4. Wallpapers ------------------------------------------------------------

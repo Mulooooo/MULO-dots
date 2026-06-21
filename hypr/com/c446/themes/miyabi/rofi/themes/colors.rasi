@@ -1,0 +1,29 @@
+/*
+ * THEME: miyabi — Rofi palette (Terafox teal, base16 + window background)
+ */
+* {
+    /* Backgrounds: deep teal */
+    base00: #152528;    /* terafox bg */
+    base01: #1d3337;    /* surface */
+    base02: #254147;    /* hover/selection (bg3) */
+    base03: #3f585d;    /* inactive/comments */
+
+    /* Content */
+    base04: #cbd9d8;    /* soft fg */
+    base05: #e6eaea;    /* main foreground */
+    base06: #f6f2ee;    /* bright */
+    base07: #ffffff;    /* highlight */
+
+    /* Accents */
+    base08: #eb746b;    /* red */
+    base09: #ff9664;    /* orange */
+    base0A: #fdb292;    /* yellow */
+    base0B: #8eb2af;    /* green */
+    base0C: #95b9c8;    /* cyan */
+    base0D: #4d9c9f;    /* PRIMARY teal (selection/links) */
+    base0E: #ce8cd7;    /* secondary purple/magenta */
+    base0F: #73a3b7;    /* blue */
+
+    /* Solid window background (no alpha) */
+    window-bg: #0e191b;
+}

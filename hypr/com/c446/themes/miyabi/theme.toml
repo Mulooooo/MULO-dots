@@ -1,0 +1,17 @@
+# THEME: miyabi — Terafox (teal) port from the i3 miyabi config
+name        = "miyabi"
+
+# GTK / icons / cursor
+gtk_theme   = "Nightfox-Dark-Terafox"
+icon_theme  = "Yaru-prussiangreen"
+cursor      = "Adwaita"
+cursor_size = "24"
+font        = "MesloLGL Nerd Font Mono 15"
+
+# VS Code: EdenEast.nightfox bundles the Terafox theme
+vscode_ext   = "EdenEast.nightfox"
+vscode_theme = "Terafox"
+
+# Wallpapers (relative to this theme's wallpapers/ dir, deployed to ~/Pictures)
+wallpaper_default = "miyabi_bg_1.jpeg"
+fastfetch_image   = "miyabi_bg_1.jpeg"
