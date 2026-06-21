@@ -13,8 +13,6 @@
 /* import theme modules */
 @import url('https://refact0r.github.io/system24/build/system24.css');
 
-
-
 body {
     /* font, change to '' for default discord font */
     --font: 'MesloLGL Nerd Font Mono' !important;
@@ -129,19 +127,19 @@ body {
     --colors: on;
     /* off: discord default colors, on: midnight custom colors */
 
-/* --- Background Layers (Matched to Rofi Iris/Vivian) --- */
+    /* --- Background Layers (Matched to Rofi Iris/Vivian) --- */
 
-/* --- Backdrop (matches Firefox frame 42,40,60) --- */
---bg-4: oklch(24% 0.045 275 / 1);
+    /* --- Backdrop (matches Firefox frame 42,40,60) --- */
+    --bg-4: oklch(24% 0.045 290 / .4);
 
-/* Mid surface (between frame and toolbar) */
---bg-3: oklch(28% 0.055 282 / 1);
+    /* Mid surface (between frame and toolbar) */
+    --bg-3: oklch(28% 0.055 290 / .6);
 
-/* Toolbar-like surface */
---bg-2: oklch(32% 0.065 288 / 1);
+    /* Toolbar-like surface */
+    --bg-2: oklch(32% 0.065 290 / .8);
 
-/* Top elements (matches popup 83,65,86 feel) */
---bg-1: oklch(36% 0.075 292 / 1);
+    /* Top elements (matches popup 83,65,86 feel) */
+    --bg-1: oklch(36% 0.075 290 / 1);
     /* Deepest layer (chat/editor) */
 
     /* --- Text Colors --- */
@@ -214,10 +212,10 @@ body {
     --border: var(--active);
     --border-hover: var(--accent-2);
     --button-border: oklch(50% 0.03 30 / 0.2);
+
+
+
 }
-
-
-
 
 @container body style(--panel-labels: on) {
     .visual-refresh {
@@ -360,6 +358,43 @@ body {
                 color: var(--label-hover-color);
             }
         }
+        .guilds__5e434::after {
+            content: '';
+        }
+        .panels__5e434::after {
+            content: '';
+        }
+        .sidebarList__5e434::after {
+            content: '';
+        }
+        .subtitleContainer_f75fb0::after {
+            content: '';
+        }
+        .messagesWrapper__36d07::after {
+            content: '';
+        }
+        .channelTextArea_f75fb0::after {
+            content: '';
+        }
+        .container_c8ffbb::after,
+        .content_f75fb0 > .membersWrap_c8ffbb::after {
+            content: '';
+        }
+        .container__133bf > .container__9293f:after {
+            content: '';
+        }
+        .peopleColumn__133bf::after {
+            content: '';
+        }
+        .nowPlayingColumn__133bf::after {
+            content: '';
+        }
+        .container__01ae2 > .container__9293f::after {
+            content: '';
+        }
+        .callContainer_cb9592::after {
+            content: '';
+        }
     }
 
 
@@ -394,25 +429,29 @@ body[style*="--background-image: off"],
     --background-image-on: none !important;
 }
 
-.inner_c0bea0{
+.inner_c0bea0 {
     border-radius: 0px !important;
 }
 
 #app-mount::before {
     content: "";
-    position: fixed; /* Ensures it stays put during scrolls */
+    position: fixed;
+    /* Ensures it stays put during scrolls */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    
-    background:
-        linear-gradient(var(--bg-4), var(--bg-4)),
+
+    background: linear-gradient(var(--bg-4), var(--bg-4)),
         /*var(--background-final-image) center / cover no-repeat*/
-        ;
+    ;
     filter: blur(5px);
     z-index: -1;
     pointer-events: none;
+}
+
+.imageWrapper {
+    opacity: 1 !important;
 }
 
 /*

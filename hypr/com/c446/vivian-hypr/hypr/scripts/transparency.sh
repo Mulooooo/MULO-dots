@@ -13,7 +13,7 @@ else
 windowrule {
     name = transparency-mode-global
     match:class = .*
-    opacity = 0.9 override 0.85 override
+    opacity = 0.875 override 0.8 override
     no_blur = off
     force_rgbx = off
     opaque = off

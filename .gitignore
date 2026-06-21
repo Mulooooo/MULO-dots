@@ -1,0 +1,10 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Editor / backup cruft
+*.bak
+*.bak2
+
+# Generated active theme tree (built by theme-switch.sh)
+hypr/com/c446/active/
