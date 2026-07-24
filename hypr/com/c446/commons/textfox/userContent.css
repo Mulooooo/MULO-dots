@@ -4,6 +4,10 @@
  /* / /_/  __/>  </ /_/ __/ /_/ />  <    */
  /* \__/\___/_/|_|\__/_/  \____/_/|_|    */
 
+/* NOTE: these @imports are flattened into a single monolith at deploy time by
+   scripts/css-bundle.py. about:newtab/about:home CSP blocks @import'd sheets,
+   so the bundle (no @imports left) is what lets config.css's --tf-* vars and
+   content/newtab.css actually reach the newtab. Keep ordering — config last. */
 @import url("content/sidebery.css");
 @import url("content/about.css");
 @import url("content/newtab.css");

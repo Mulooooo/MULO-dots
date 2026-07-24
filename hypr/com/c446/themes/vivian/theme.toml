@@ -4,8 +4,9 @@ name        = "vivian"
 # GTK / icons / cursor (installed to ~/.themes and ~/.icons from gtk/*.zip)
 gtk_theme   = "oomox-Gigavolt"
 icon_theme  = "Yaru-prussiangreen"
-cursor      = "Vivian-Cursors"
-cursor_size = "24"
+cursor           = "Vivian-Cursors"
+cursor_secondary = "capitaine-cursors-light"
+cursor_size      = "24"
 font        = "MesloLGL Nerd Font Mono 20"
 
 # VS Code: extension id (installed via `code --install-extension`) + theme label

@@ -34,6 +34,14 @@
     background-image: none !important;
   }
 
+  /* The opaque wrapper sits above <body> and would otherwise show Firefox's
+     default newtab color; force it to the theme background too. */
+  .outer-wrapper,
+  .ds-outer-wrapper-breakpoint-override {
+    background-color: var(--tf-bg) !important;
+    background-image: none !important;
+  }
+
   /* replace firefox logo */
   .logo-and-wordmark {
     .logo {

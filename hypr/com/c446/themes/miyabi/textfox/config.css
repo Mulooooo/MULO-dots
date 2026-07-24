@@ -18,6 +18,14 @@
     --textfox-bg-color: var(--tf-bg) !important;
     --textfox-tab-active-bg: var(--tf-bg-alt) !important;
     --textfox-accent-color: var(--tf-accent) !important;
+
+    /* Highlights → teal (override the muddy defaults from overwrites.css) */
+    --urlbarView-highlight-background: color-mix(in srgb, var(--tf-accent) 30%, transparent) !important;
+    --autocomplete-popup-highlight-background: var(--tf-accent) !important;
+
+    /* Selected/hover tab background → teal tint (was a desaturated copper mix) */
+    --tab-selected-bgcolor: color-mix(in srgb, var(--tf-accent) 22%, var(--tf-bg)) !important;
+    --tab-hover-background-color: color-mix(in srgb, var(--tf-accent) 12%, var(--tf-bg)) !important;
 }
 
 /* --- UI Depth Layers --- */
@@ -32,10 +40,19 @@
     background-color: var(--tf-bg) !important;
 }
 
-/* Active tab highlight using the teal accent */
+/* Active tab highlight — teal tint + accent edge.
+   Selectors are kept specific enough to beat #TabsToolbar's ID rule in
+   overwrites/tabs.css, and cover both horizontal and vertical tab strips. */
+#TabsToolbar .tab-background:is([selected], [multiselected]),
+box#vertical-tabs .tab-background:is([selected="true"], [selected], [multiselected]),
 .tab-background[selected="true"] {
-    background-color: rgba(77, 156, 159, 0.2) !important;
-    border-top: 2px solid var(--tf-accent) !important;
+    background-color: color-mix(in srgb, var(--tf-accent) 22%, var(--tf-bg)) !important;
+    box-shadow: inset 2px 0 0 0 var(--tf-accent) !important;
+}
+
+/* Text selection highlight → teal */
+::selection {
+    background-color: color-mix(in srgb, var(--tf-accent) 35%, transparent) !important;
 }
 
 /* URL bar focus glow */

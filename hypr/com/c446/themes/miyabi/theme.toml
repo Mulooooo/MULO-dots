@@ -4,8 +4,9 @@ name        = "miyabi"
 # GTK / icons / cursor
 gtk_theme   = "Nightfox-Dark-Terafox"
 icon_theme  = "Yaru-prussiangreen"
-cursor      = "Miyabi-Cursors"
-cursor_size = "24"
+cursor           = "Miyabi-Cursors"
+cursor_secondary = "capitaine-cursors-light"
+cursor_size      = "24"
 font        = "MesloLGL Nerd Font Mono 15"
 
 # VS Code: EdenEast.nightfox bundles the Terafox theme

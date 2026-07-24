@@ -1,0 +1,60 @@
+# dunst base config (color-free).
+# Theme colors live in themes/<name>/dunst/dunstrc.d/colors.conf and are
+# merged on top of this file by dunst's dunstrc.d drop-in mechanism.
+[global]
+    ### --- Typography ---
+    # Synced with Waybar/Rofi font family
+    font = MesloLGL Nerd Font Mono 11
+
+    ### --- Graphical ---
+    frame_width = 1
+    separator_color = frame
+    separator_height = 1
+
+    # Sharp edges (matches Waybar module border-radius: 0)
+    corner_radius = 0
+
+    # Padding for a clean, spaced look
+    padding = 15
+    horizontal_padding = 15
+    text_icon_padding = 10
+
+    # Transparency 0 lets the hex alpha (last 2 digits) handle the opacity
+    transparency = 0
+
+    ### --- Layout ---
+    width = 320
+    height = 200
+    offset = 20x50
+    origin = top-right
+
+    # Text alignment
+    alignment = left
+    word_wrap = yes
+
+    # Progress bar geometry (colors set per-theme)
+    progress_bar = true
+    progress_bar_height = 6
+    progress_bar_frame_width = 1
+    progress_bar_min_width = 150
+    progress_bar_max_width = 300
+
+[urgency_low]
+    timeout = 5
+
+[urgency_normal]
+    timeout = 10
+
+[urgency_critical]
+    timeout = 0
+
+[shortcuts]
+    close = ctrl+space
+    close_all = ctrl+shift+space
+    history = ctrl+grave
+
+[music]
+    # Specialized look for music notifications
+    appname = Spotify
+    summary = "Now playing"
+    timeout = 6

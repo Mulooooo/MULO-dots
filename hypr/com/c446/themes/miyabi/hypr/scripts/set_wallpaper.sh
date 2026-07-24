@@ -6,10 +6,12 @@ PRIMARY="eDP-1"
 SECONDARY="HDMI-A-1"
 WIN_BG="$BG_DIR/bg_win.jpg"
 
-# Slot 1 is always bg_win; the rest map to miyabi wallpapers.
+# Slot 1 is always bg_win; the rest cycle through the miyabi wallpapers.
 case $1 in
-    1) FILE="bg_win.jpg" ;;
-    2|3|4|5|6|7|8|9) FILE="miyabi_bg_1.jpeg" ;;
+    1)     FILE="bg_win.jpg" ;;
+    2|5|8) FILE="miyabi_bg_1.jpeg" ;;
+    3|6|9) FILE="miyabi_bg_2.jpg" ;;
+    4|7)   FILE="miyabi_bg_3.jpeg" ;;
     *) exit 1 ;;
 esac
 
