@@ -58,7 +58,7 @@ fail() {
 }
 
 random_keyword() {
-    print -r -- "${KEYWORDS[$((RANDOM % ${#KEYWORDS[@]} + 1))]}"
+    REPLY="${KEYWORDS[$((RANDOM % ${#KEYWORDS[@]} + 1))]}"
 }
 
 generate_output_path() {
@@ -70,9 +70,12 @@ generate_output_path() {
 
     while true; do
         timestamp="$(date '+%Y-%m-%d_%H-%M-%S')"
-        first="$(random_keyword)"
-        second="$(random_keyword)"
-        third="$(random_keyword)"
+        random_keyword
+        first="$REPLY"
+        random_keyword
+        second="$REPLY"
+        random_keyword
+        third="$REPLY"
 
         # Avoid duplicate words inside the same filename.
         [[ "$first" == "$second" ||

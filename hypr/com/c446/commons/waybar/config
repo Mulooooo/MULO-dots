@@ -10,27 +10,38 @@
     "spacing": 0,
     "exclusive": true,
     "modules-left": [
-        "hyprland/workspaces",
-        "hyprland/window"
+        "custom/ws1",
+        "custom/ws2",
+        "custom/ws3",
+        "custom/ws4",
+        "custom/ws5",
+        "custom/ws6",
+        "custom/ws7",
+        "custom/ws8",
+        "custom/ws9",
+        "custom/ws10"
     ],
     "modules-center": [
         "clock"
     ],
     "modules-right": [
+        "mpris",
         "custom/mpris-holidays",
         "custom/mediactl",
         "pulseaudio",
         "battery",
         "tray"
     ],
-    "hyprland/workspaces": {
-        "format": "{name}",
-        "on-click": "activate",
-        "all-outputs": true,
-        "persistent-workspaces": {
-            "*": 5
-        }
-    },
+    "custom/ws1": { "exec": "~/.config/waybar/workspace.sh 1", "return-type": "json", "on-click": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"1\" })'" },
+    "custom/ws2": { "exec": "~/.config/waybar/workspace.sh 2", "return-type": "json", "on-click": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"2\" })'" },
+    "custom/ws3": { "exec": "~/.config/waybar/workspace.sh 3", "return-type": "json", "on-click": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"3\" })'" },
+    "custom/ws4": { "exec": "~/.config/waybar/workspace.sh 4", "return-type": "json", "on-click": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"4\" })'" },
+    "custom/ws5": { "exec": "~/.config/waybar/workspace.sh 5", "return-type": "json", "on-click": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"5\" })'" },
+    "custom/ws6": { "exec": "~/.config/waybar/workspace.sh 6", "return-type": "json", "on-click": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"6\" })'" },
+    "custom/ws7": { "exec": "~/.config/waybar/workspace.sh 7", "return-type": "json", "on-click": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"7\" })'" },
+    "custom/ws8": { "exec": "~/.config/waybar/workspace.sh 8", "return-type": "json", "on-click": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"8\" })'" },
+    "custom/ws9": { "exec": "~/.config/waybar/workspace.sh 9", "return-type": "json", "on-click": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"9\" })'" },
+    "custom/ws10": { "exec": "~/.config/waybar/workspace.sh 10", "return-type": "json", "on-click": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"10\" })'" },
     "clock": {
         "format": "{:%H:%M}",
         "format-alt": "{:%A, %B %d, %Y}",
@@ -53,6 +64,25 @@
             "on-scroll-up": "shift_up",
             "on-scroll-down": "shift_down"
         }
+    },
+    "mpris": {
+        "player": "spotify",
+        "format": "{player_icon} {dynamic}",
+        "format-paused": "{status_icon} {dynamic}",
+        "player-icons": {
+            "default": "▶",
+            "spotify": "󰓇"
+        },
+        "status-icons": {
+            "paused": "󰏤",
+            "playing": "󰐊",
+            "stopped": "󰓛"
+        },
+        "tooltip": true,
+        "max-length": 48,
+        "on-click": "playerctl -p spotify play-pause",
+        "on-click-middle": "playerctl -p spotify previous",
+        "on-click-right": "playerctl -p spotify next"
     },
     "custom/mpris-holidays": {
         "format": "{}",

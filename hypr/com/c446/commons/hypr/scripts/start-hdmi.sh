@@ -6,7 +6,7 @@
 # preferring its native/preferred mode and falling back to safe modes if needed.
 #
 # Run manually:  ~/.config/hypr/scripts/start-hdmi.sh
-# (or bound to a key — see binds.conf)
+# (or bound to a key — see binds.lua)
 
 set -uo pipefail
 

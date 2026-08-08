@@ -11,7 +11,7 @@ case $1 in
     1)     FILE="bg_win.jpg" ;;
     2|5|8) FILE="miyabi_bg_1.jpeg" ;;
     3|6|9) FILE="miyabi_bg_2.jpg" ;;
-    4|7)   FILE="miyabi_bg_3.jpeg" ;;
+    4|7|10) FILE="miyabi_bg_3.jpeg" ;;
     *) exit 1 ;;
 esac
 

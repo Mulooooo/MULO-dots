@@ -4,7 +4,7 @@
 #   - kills wl-mirror and exiles orphaned windows to workspace 9 on disconnect
 
 HDMI_MONITOR="HDMI-A-1"
-# Workspaces that live on HDMI-A-1 (see monitors.conf)
+# Workspaces that live on HDMI-A-1 (see monitors.lua)
 HDMI_WORKSPACES=(11 12 13 14 15 16 17 18 19 20)
 EXILE_WS=9
 

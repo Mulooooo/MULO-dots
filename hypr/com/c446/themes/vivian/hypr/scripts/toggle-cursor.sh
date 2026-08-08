@@ -4,7 +4,7 @@
 # Lives in themes/<theme>/hypr/scripts/ and derives its theme from its own
 # location, so the same script works for every theme. It reads the `cursor`
 # (main) and `cursor_secondary` cursors from this theme's theme.toml, toggles
-# between them, rewrites this theme's hypr/theme.conf, and applies live.
+# between them, rewrites this theme's hypr/theme.lua, and applies live.
 #
 # Usage: toggle-cursor.sh [main|secondary|toggle|status]
 #   main      - switch to the theme's main cursor
@@ -18,10 +18,10 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")" && pwd)"
 THEME_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"   # themes/<theme>
 THEME_TOML="$THEME_DIR/theme.toml"
-THEME_CONF="$THEME_DIR/hypr/theme.conf"
+THEME_LUA="$THEME_DIR/hypr/theme.lua"
 
 [ -f "$THEME_TOML" ] || { echo "❌ theme.toml not found: $THEME_TOML" >&2; exit 1; }
-[ -f "$THEME_CONF" ] || { echo "❌ theme.conf not found: $THEME_CONF" >&2; exit 1; }
+[ -f "$THEME_LUA" ] || { echo "❌ theme.lua not found: $THEME_LUA" >&2; exit 1; }
 
 # Minimal TOML reader for simple `key = "value"` lines (matches apply-theme.sh).
 toml_get() {
@@ -37,15 +37,15 @@ SIZE="$(toml_get cursor_size      "$THEME_TOML")"; SIZE="${SIZE:-24}"
 [ -n "$SECONDARY" ] || { echo "❌ 'cursor_secondary' not set in $THEME_TOML" >&2; exit 1; }
 
 get_current_cursor() {
-    grep "^env = HYPRCURSOR_THEME," "$THEME_CONF" | sed 's/.*,//' | tr -d ' '
+    grep 'hl.env("HYPRCURSOR_THEME"' "$THEME_LUA" | sed 's/.*,[[:space:]]*"\([^"]*\)".*/\1/'
 }
 
-set_cursor_in_conf() {
+set_cursor_in_lua() {
     local theme=$1 size=${2:-$SIZE}
-    sed -i "s/^env = HYPRCURSOR_THEME,.*/env = HYPRCURSOR_THEME,$theme/" "$THEME_CONF"
-    sed -i "s/^env = XCURSOR_THEME,.*/env = XCURSOR_THEME,$theme/"        "$THEME_CONF"
-    sed -i "s/^env = HYPRCURSOR_SIZE,.*/env = HYPRCURSOR_SIZE,$size/"     "$THEME_CONF"
-    sed -i "s/^env = XCURSOR_SIZE,.*/env = XCURSOR_SIZE,$size/"           "$THEME_CONF"
+    sed -i "s/hl.env(\"HYPRCURSOR_THEME\",.*/hl.env(\"HYPRCURSOR_THEME\", \"$theme\")/" "$THEME_LUA"
+    sed -i "s/hl.env(\"XCURSOR_THEME\",.*/hl.env(\"XCURSOR_THEME\", \"$theme\")/"       "$THEME_LUA"
+    sed -i "s/hl.env(\"HYPRCURSOR_SIZE\",.*/hl.env(\"HYPRCURSOR_SIZE\", \"$size\")/"   "$THEME_LUA"
+    sed -i "s/hl.env(\"XCURSOR_SIZE\",.*/hl.env(\"XCURSOR_SIZE\", \"$size\")/"         "$THEME_LUA"
 }
 
 apply_cursor_live() {
@@ -87,8 +87,8 @@ if [[ "$current" == "$target" ]]; then
 fi
 
 echo "Switching cursor from $current to $target..."
-set_cursor_in_conf "$target"
+set_cursor_in_lua "$target"
 apply_cursor_live "$target"
 notify_cursor_change "$target"
 echo "✅ Cursor switched to $target (size $SIZE) for theme $(basename "$THEME_DIR")"
-echo "   (theme.conf updated; takes full effect on next hyprctl reload)"
+echo "   (theme.lua updated; takes full effect on next hyprctl reload)"

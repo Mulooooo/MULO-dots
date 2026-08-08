@@ -16,6 +16,7 @@ case $1 in
     7) FILE="vivian_bg_7.jpg" ;;
     8) FILE="vivian_bg_8.jpg" ;;
     9) FILE="vivian_bg_9.jpg" ;;
+    10) FILE="vivian_bg_5.mp4" ;;
     *) exit 1 ;;
 esac
 

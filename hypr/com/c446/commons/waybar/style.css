@@ -15,7 +15,16 @@ window#waybar {
 
 /* Update your module block to this */
 #workspaces,
-#window,
+#custom-ws1,
+#custom-ws2,
+#custom-ws3,
+#custom-ws4,
+#custom-ws5,
+#custom-ws6,
+#custom-ws7,
+#custom-ws8,
+#custom-ws9,
+#custom-ws10,
 #mpris,
 #custom-mpris-holidays,
 #pulseaudio,
@@ -32,11 +41,22 @@ window#waybar {
 }
 
 /* Edge Snap alignment */
-#workspaces { margin-left: 4px; border-radius: 0px 0 0 0px; }
+#workspaces,
+#custom-ws1 { margin-left: 4px; border-radius: 0px 0 0 0px; }
 #tray { margin-right: 4px; border-radius: 0 0px 0px 0; }
 
 /* --- Workspace Button Styling (Anti-Stacking) --- */
-#workspaces button {
+#workspaces button,
+#custom-ws1,
+#custom-ws2,
+#custom-ws3,
+#custom-ws4,
+#custom-ws5,
+#custom-ws6,
+#custom-ws7,
+#custom-ws8,
+#custom-ws9,
+#custom-ws10 {
     padding: 0 6px;
     margin: 0px 2px 0px 2px; /* Remove bottom margin to prevent stacking */
     background: @button-idle; /* Light tint rather than heavy rgba */
@@ -46,14 +66,34 @@ window#waybar {
     transition: all 0.2s ease;
 }
 
-#workspaces button.active {
+#workspaces button.active,
+#custom-ws1.active,
+#custom-ws2.active,
+#custom-ws3.active,
+#custom-ws4.active,
+#custom-ws5.active,
+#custom-ws6.active,
+#custom-ws7.active,
+#custom-ws8.active,
+#custom-ws9.active,
+#custom-ws10.active {
     background: @button-active;
     color: @active-border;
     border: 1px solid rgba(192, 170, 255, 0.3);
     /* Remove border-bottom to keep height consistent with idle buttons */
 }
 
-#workspaces button:hover {
+#workspaces button:hover,
+#custom-ws1:hover,
+#custom-ws2:hover,
+#custom-ws3:hover,
+#custom-ws4:hover,
+#custom-ws5:hover,
+#custom-ws6:hover,
+#custom-ws7:hover,
+#custom-ws8:hover,
+#custom-ws9:hover,
+#custom-ws10:hover {
     background: rgba(255, 255, 255, 0.1);
     color: @text-main;
     border-color: @active-border;
