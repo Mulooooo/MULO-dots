@@ -1,0 +1,20 @@
+/* Miyabi Light Rofi palette. */
+* {
+    base00: #edf5f8;
+    base01: #f8fcff;
+    base02: #deeff5;
+    base03: #d4e8ee;
+    base04: #426676;
+    base05: #163047;
+    base06: #163047;
+    base07: #163047;
+    base08: #c54b5e;
+    base09: #c36a32;
+    base0A: #a66a00;
+    base0B: #3f7d55;
+    base0C: #23758f;
+    base0D: #2f91a9;
+    base0E: #6b5aa6;
+    base0F: #2f6891;
+    window-bg: #f8fcff;
+}

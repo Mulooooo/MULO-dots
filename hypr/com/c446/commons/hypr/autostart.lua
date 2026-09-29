@@ -10,7 +10,7 @@ local commands = {
     "~/.config/hypr/scripts/apply-theme.sh",
     "waybar",
     "~/.config/hypr/scripts/set_wallpaper.sh",
-    "~/.config/hypr/scripts/hdmi-events.sh",
+    "~/.config/hypr/scripts/monitor-manager.sh apply",
 }
 
 for _, command in ipairs(commands) do

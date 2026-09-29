@@ -1,7 +1,7 @@
 -- Miyabi cursor and border palette.
 hl.env("HYPRCURSOR_SIZE", "24")
-hl.env("HYPRCURSOR_THEME", "capitaine-cursors-light")
-hl.env("XCURSOR_THEME", "capitaine-cursors-light")
+hl.env("HYPRCURSOR_THEME", "Miyabi-Cursors")
+hl.env("XCURSOR_THEME", "Miyabi-Cursors")
 hl.env("XCURSOR_SIZE", "24")
 
 hl.config({

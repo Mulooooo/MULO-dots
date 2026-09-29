@@ -2,7 +2,7 @@
  * ROFI layout: VIVIAN (JetBrains Mono Edition) — commons
  * Palette (base00..base0F + window-bg) comes from the active theme's colors.rasi
  */
-@import "colors.rasi"
+@import "~/.config/rofi/themes/colors.rasi"
 
 * {
     spacing: 0;
@@ -83,7 +83,7 @@ scrollbar {
 element {
     padding: 10px;
     spacing: 15px;
-    border-radius: 4px; /* Matches your GTK "Softness" */
+    border-radius: 0px;
     children: [element-icon, element-text];
 }
 

@@ -172,6 +172,13 @@ if [ -n "$CURS" ]; then
     mkdir -p "$HOME/.icons/default"
     printf '[Icon Theme]\nName=Default\nComment=Active c446 cursor\nInherits=%s\n' "$CURS" > "$HOME/.icons/default/index.theme"
     c_ok "~/.icons/default inherits $CURS (Xwayland/Spotify cursor fix)"
+    HYPRCURSOR_DIR="$TDIR/gtk/${CURS}-Hypr"
+    [ -d "$HYPRCURSOR_DIR" ] || HYPRCURSOR_DIR="$THEMES/miyabi/gtk/${CURS}-Hypr"
+    if [ -d "$HYPRCURSOR_DIR" ]; then
+        mkdir -p "$HOME/.local/share/icons/$CURS"
+        cp -rf "$HYPRCURSOR_DIR/." "$HOME/.local/share/icons/$CURS/"
+        c_ok "~/.local/share/icons/$CURS (native Hyprcursor)"
+    fi
 fi
 bash "$COMMONS/hypr/scripts/apply-theme.sh" "$MANIFEST" || c_warn "apply-theme.sh failed (gsettings/hyprctl unavailable?)"
 
@@ -180,9 +187,12 @@ bash "$COMMONS/hypr/scripts/apply-theme.sh" "$MANIFEST" || c_warn "apply-theme.s
 # as per-file symlinks (no copying — avoids duplicating large videos/images).
 c_step "Wallpapers"
 mount_wall() { # <wallpapers-subdir>  — mounts commons then theme (theme overlays)
-    local sub="$1" dest="$HOME/Pictures/$1" n=0 base
+    local sub="$1" dest="$HOME/Pictures/$1" n=0 base wallpaper_theme wallpaper_dir
+    wallpaper_theme="$(toml_get wallpaper_theme "$MANIFEST")"
+    wallpaper_dir="$TDIR"
+    [ -n "$wallpaper_theme" ] && [ -d "$THEMES/$wallpaper_theme" ] && wallpaper_dir="$THEMES/$wallpaper_theme"
     mkdir -p "$dest"
-    for base in "$COMMONS/wallpapers/$sub" "$TDIR/wallpapers/$sub"; do
+    for base in "$COMMONS/wallpapers/$sub" "$wallpaper_dir/wallpapers/$sub"; do
         [ -d "$base" ] || continue
         for f in "$base"/*; do
             [ -e "$f" ] && ln -sfn "$f" "$dest/$(basename "$f")" && n=$((n+1))
@@ -197,12 +207,18 @@ if [ -n "$FF_IMG" ] && [ -e "$HOME/Pictures/$FF_IMG" ]; then
     mkdir -p "$CONFIG/fastfetch"
     ln -sfn "$HOME/Pictures/$FF_IMG" "$CONFIG/fastfetch/fastfetch_cur" && c_ok "fastfetch_cur → ~/Pictures/$FF_IMG"
 fi
+bash "$COMMONS/hypr/scripts/apply-theme-extras.sh" "$MANIFEST" "$TDIR" "$COMMONS" "$CONFIG" || c_warn "apply-theme-extras.sh failed"
 
 # --- 5. Vesktop (Discord) -----------------------------------------------------
 c_step "Vesktop"
 if [ -d "$TDIR/vesktop" ]; then
     mkdir -p "$CONFIG/vesktop/themes/assets"
-    cp -f "$TDIR"/vesktop/*.css "$CONFIG/vesktop/themes/" 2>/dev/null && c_ok "vesktop theme deployed"
+    for css in "$TDIR"/vesktop/*.css; do
+        [ -f "$css" ] || continue
+        [ "$(basename "$css")" = "sys-24-miyabi-light.css" ] && continue
+        dest="$CONFIG/vesktop/themes/$(basename "$css")"
+        cp -f "$css" "$dest" && c_ok "vesktop theme deployed"
+    done
     [ -d "$TDIR/vesktop/assets" ] && cp -rf "$TDIR/vesktop/assets/." "$CONFIG/vesktop/themes/assets/" 2>/dev/null
 fi
 
@@ -269,9 +285,7 @@ else
     c_warn "'code' CLI not found — set VS Code theme manually: $VS_THEME"
 fi
 
-# --- 8. IntelliJ (best-effort, skipped if no clean path) ----------------------
-INTELLIJ_NOTE="IntelliJ: set the editor scheme manually (Settings → Appearance)."
-c_warn "$INTELLIJ_NOTE"
+# --- 8. IntelliJ is applied by apply-theme-extras.sh --------------------------
 
 # --- 9. Reload running apps ---------------------------------------------------
 c_step "Reloading"

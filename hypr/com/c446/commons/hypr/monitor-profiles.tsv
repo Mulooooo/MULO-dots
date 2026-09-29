@@ -1,0 +1,7 @@
+# Optional overrides for specific physical displays.
+# Match is a Bash regex tested against BOTH connector name and EDID description.
+# Columns are TAB-separated: REGEX    MODE    POSITION    SCALE
+#
+# Examples (uncomment/edit only if needed):
+# Dell.*U2723QE	3840x2160@60	auto-center-left	1.5
+# EPSON|BenQ|Projector	1920x1080@60	auto-center-left	1

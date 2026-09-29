@@ -1,7 +1,8 @@
 #!/bin/bash
 
 BG_DIR="$HOME/Pictures/Backgrounds"
-PRIMARY="eDP-1"
+PRIMARY="${2:-eDP-1}"
+FOCUSED_OUTPUT="${2:-}"
 SECONDARY="HDMI-A-1"
 WIN_BG="$BG_DIR/bg_win.jpg"
 
@@ -30,17 +31,28 @@ fi
 
 # 1. Handle the Secondary Monitor (HDMI-A-1)
 # This keeps your "win_bg" persistent on the secondary monitor
-awww img -o "$SECONDARY" "$WIN_BG" --transition-type none
+if [[ -z "${2:-}" ]]; then
+    awww img -o "$SECONDARY" "$WIN_BG" --transition-type none
+fi
 
 # 2. Handle the Primary Monitor (eDP-1)
+stop_video_wallpaper() {
+    if [[ -z "$FOCUSED_OUTPUT" ]]; then
+        pkill mpvpaper 2>/dev/null || true
+        return
+    fi
+
+    local pid
+    while IFS= read -r pid; do
+        if tr '\0' '\n' < "/proc/$pid/cmdline" | grep -Fxq "$PRIMARY"; then
+            kill "$pid" 2>/dev/null || true
+        fi
+    done < <(pgrep -x mpvpaper || true)
+}
+
+stop_video_wallpaper
 if [[ "$FILE" == *.mp4 ]]; then
-    # Kill mpvpaper only for the primary monitor if you want to keep others
-    # Or pkill mpvpaper entirely if you only use it on eDP-1
-    pkill mpvpaper 
-    
     mpvpaper -o "no-audio --loop --vf=scale=iw:-1,pad=iw:ih:(ow-iw)/2:(oh-ih)/2 --panscan=1.0" "$PRIMARY" "$TARGET" &
 else
-    # If switching back to an image, kill mpvpaper so the image underneath is visible
-    pkill mpvpaper
-    awww img -o "$PRIMARY" "$TARGET" --transition-type wipe --transition-step 255 --transition-fps 240
+    awww img -o "$PRIMARY" "$TARGET" --transition-type none
 fi

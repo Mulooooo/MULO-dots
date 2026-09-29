@@ -65,6 +65,7 @@ def bundle(path: str, seen: set, rel_dir: str) -> str:
     out = []
     last = 0
     src_dir = os.path.dirname(path)
+    real_dir = os.path.dirname(real)
     for m in IMPORT_RE.finditer(css):
         out.append(rewrite_urls(css[last:m.start()], rel_dir))
         target = m.group(2)
@@ -72,6 +73,10 @@ def bundle(path: str, seen: set, rel_dir: str) -> str:
             out.append(m.group(0))
         else:
             child = os.path.join(src_dir, target)
+            # First-level imports use active/ overlay links; nested imports in
+            # a linked theme file resolve relative to that theme's real path.
+            if not os.path.exists(child) and real_dir != src_dir:
+                child = os.path.join(real_dir, target)
             child_rel = os.path.normpath(os.path.join(rel_dir, os.path.dirname(target)))
             if child_rel == '.':
                 child_rel = ''

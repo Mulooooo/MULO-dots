@@ -1,0 +1,34 @@
+# THEME: miyabi-light — Miyabi wallpaper/cursor identity with a light glass UI
+name              = "miyabi-light"
+
+# GTK / icons / cursor
+gtk_theme         = "Adwaita"
+icon_theme        = "Yaru-prussiangreen"
+cursor            = "Miyabi-Cursors"
+cursor_secondary  = "capitaine-cursors-light"
+cursor_size       = "24"
+font              = "MesloLGL Nerd Font Mono 15"
+color_scheme      = "prefer-light"
+
+# Qt 5/6
+qt_style          = "kvantum"
+qt_kvantum_theme  = "KvFlatLight"
+qt_color_scheme   = "Miyabi-Light"
+qt_icon_theme     = "breeze"
+qt_custom_palette = "true"
+
+# VS Code / IntelliJ
+vscode_theme      = "Catppuccin Latte"
+vscode_colors     = ""
+vscode_background = "Backgrounds/miyabi_bg_2_new.jpg"
+intellij_laf      = "Catppuccin Latte"
+intellij_color_scheme = "Catppuccin Latte"
+
+# Spotify / Spicetify
+spicetify_theme   = "miyabi-light"
+spicetify_scheme  = "miyabi-light"
+
+# Reuse the Miyabi assets without copying them.
+wallpaper_theme   = "miyabi"
+wallpaper_default = "miyabi_bg_1.jpeg"
+fastfetch_image   = "fastfetch_assets/miyabi_bg_1.jpeg"

@@ -1,0 +1,23 @@
+/*
+ * Miyabi Light — shared liquid-glass design tokens.
+ *
+ * App adapters keep their native syntax, but should use these values so
+ * Firefox, GTK, Waybar, Qt, Kitty, and editors remain visually related.
+ */
+:root {
+    --miyabi-bg: #edf5f8;
+    --miyabi-surface: rgba(248, 252, 255, 0.78);
+    --miyabi-surface-strong: rgba(255, 255, 255, 0.9);
+    --miyabi-surface-soft: rgba(222, 239, 245, 0.72);
+    --miyabi-border: rgba(43, 145, 169, 0.28);
+    --miyabi-border-strong: #2f91a9;
+    --miyabi-accent: #2f91a9;
+    --miyabi-accent-deep: #23758f;
+    --miyabi-accent-soft: rgba(47, 145, 169, 0.18);
+    --miyabi-text: #163047;
+    --miyabi-text-muted: #5e7885;
+    --miyabi-shadow: rgba(22, 48, 71, 0.14);
+    --miyabi-radius: 0px;
+    --miyabi-radius-small: 0px;
+    --miyabi-blur: 24px;
+}

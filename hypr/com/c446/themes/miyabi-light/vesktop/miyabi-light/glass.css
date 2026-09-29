@@ -1,0 +1,76 @@
+/* Miyabi Light glass surfaces and restrained interaction states. */
+:root {
+    --miyabi-glass: rgba(248, 252, 255, 0.78);
+    --miyabi-glass-strong: rgba(255, 255, 255, 0.90);
+    --miyabi-glass-soft: rgba(222, 239, 245, 0.72);
+    --miyabi-glass-border: rgba(43, 145, 169, 0.28);
+    --miyabi-glass-shadow: 0 10px 24px rgba(22, 48, 71, 0.14);
+    --miyabi-glass-radius: 0px;
+}
+
+body,
+#app-mount {
+    background: #edf5f8 !important;
+}
+
+#app-mount::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: #edf5f8;
+}
+
+div[class^="sidebar_"],
+div[class^="chat_"] > main,
+aside[class^="membersWrap_"],
+section[class^="panels_"],
+div[class^="container_"][role="listitem"] {
+    background: var(--miyabi-glass) !important;
+    border-color: var(--miyabi-glass-border) !important;
+    backdrop-filter: blur(24px);
+}
+
+div[class^="popout_"],
+div[class^="menu_"],
+div[role="dialog"],
+div[class^="channelTextArea_"] {
+    background: var(--miyabi-glass-strong) !important;
+    border: 1px solid var(--miyabi-glass-border) !important;
+    border-radius: var(--miyabi-glass-radius) !important;
+    box-shadow: var(--miyabi-glass-shadow) !important;
+    backdrop-filter: blur(24px);
+}
+
+input::placeholder,
+textarea::placeholder,
+[class*="searchBar_"] [class*="placeholder_"],
+[class*="searchBar_"] [class*="queryText_"] {
+    color: var(--text-4) !important;
+}
+
+[class^="name_"],
+[class*=" name_"],
+[class^="nameAndDecorators_"] {
+    color: var(--text-1) !important;
+    background: transparent !important;
+}
+
+[class^="subText_"],
+[class^="activity_"] {
+    color: var(--text-4) !important;
+}
+
+div[class^="channel_"]:hover,
+div[class^="linkButton_"]:hover,
+div[class^="interactive_"]:hover,
+div[class^="container_"][role="listitem"]:hover {
+    background: var(--hover) !important;
+}
+
+div[class^="channel_"].selected,
+div[class^="interactive_"][aria-selected="true"],
+div[class^="container_"][role="listitem"][aria-selected="true"] {
+    background: var(--active) !important;
+}

@@ -1,0 +1,1 @@
+../../../miyabi/hypr/scripts/toggle-cursor.sh

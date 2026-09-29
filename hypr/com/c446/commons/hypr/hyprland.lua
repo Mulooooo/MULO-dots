@@ -22,7 +22,7 @@ hl.config({
         disable_autoreload = true,
     },
     xwayland = {
-        force_zero_scaling = true,
+        force_zero_scaling =true, 
     },
     cursor = {
         no_hardware_cursors = true,

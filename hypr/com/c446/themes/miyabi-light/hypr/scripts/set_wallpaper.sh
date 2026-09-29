@@ -1,0 +1,1 @@
+../../../miyabi/hypr/scripts/set_wallpaper.sh

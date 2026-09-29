@@ -36,6 +36,7 @@ ICON_THEME="$(toml_get icon_theme "$MANIFEST")"
 CURS="$(toml_get cursor           "$MANIFEST")"
 CURS_SIZE="$(toml_get cursor_size "$MANIFEST")"; CURS_SIZE="${CURS_SIZE:-24}"
 FONT="$(toml_get font             "$MANIFEST")"
+COLOR_SCHEME="$(toml_get color_scheme "$MANIFEST")"; COLOR_SCHEME="${COLOR_SCHEME:-prefer-dark}"
 
 apply_gsettings() {
     local SCHEMA="org.gnome.desktop.interface"
@@ -43,7 +44,7 @@ apply_gsettings() {
     gsettings set "$SCHEMA" icon-theme   "$ICON_THEME"
     gsettings set "$SCHEMA" cursor-theme "$CURS"
     gsettings set "$SCHEMA" font-name    "$FONT"
-    gsettings set "$SCHEMA" color-scheme 'prefer-dark'
+    gsettings set "$SCHEMA" color-scheme "$COLOR_SCHEME"
 }
 
 # Upsert a `key=value` line (gtk-3.0/4.0 settings.ini, [Settings] section).

@@ -1,9 +1,11 @@
 hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
 hl.env("XDG_SESSION_TYPE", "wayland")
 hl.env("XDG_SESSION_DESKTOP", "Hyprland")
+hl.env("ANIMA_DIRECTORY","/home/clement/Games/SteamLibrary/steamapps/workshop/content/3474900")
 
-hl.env("AQ_DRM_DEVICES", "/dev/dri/card2:/dev/dri/card1")
-hl.env("GBM_BACKEND", "nvidia-drm")
+-- Stable udev aliases; Intel is primary, NVIDIA remains available for secondary outputs.
+hl.env("AQ_DRM_DEVICES", "/dev/dri/intel-card:/dev/dri/nvidia-card")
+-- Do not force the Nvidia GBM backend globally; Intel is the primary DRM device.
 hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
 hl.env("NVD_BACKEND", "direct")
 hl.env("WLR_NO_HARDWARE_CURSORS", "1")

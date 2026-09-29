@@ -1,0 +1,144 @@
+/* Miyabi Light Waybar adapter: common selectors with liquid-glass surfaces. */
+@import url("colors.css");
+
+* {
+    font-family: "MesloLGL Nerd Font Mono", monospace;
+    font-size: 13px;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+window#waybar {
+    background: transparent;
+}
+
+#workspaces,
+#custom-ws1,
+#custom-ws2,
+#custom-ws3,
+#custom-ws4,
+#custom-ws5,
+#custom-ws6,
+#custom-ws7,
+#custom-ws8,
+#custom-ws9,
+#custom-ws10,
+#mpris,
+#custom-mpris-holidays,
+#custom-mediactl,
+#pulseaudio,
+#battery,
+#clock,
+#tray {
+    background: @bg-base;
+    color: @text-main;
+    margin: 0 2px;
+    padding: 2px 14px;
+    border: 1px solid @inactive-border;
+    border-radius: 0;
+    box-shadow: 0 3px 14px rgba(22, 48, 71, 0.08);
+    transition: all 0.2s ease;
+}
+
+/* Keep the existing edge spacing while every surface remains a glass card. */
+#workspaces,
+#custom-ws1 { margin-left: 4px; }
+#tray { margin-right: 4px; }
+
+/* --- Workspace button styling --- */
+#workspaces button,
+#custom-ws1,
+#custom-ws2,
+#custom-ws3,
+#custom-ws4,
+#custom-ws5,
+#custom-ws6,
+#custom-ws7,
+#custom-ws8,
+#custom-ws9,
+#custom-ws10 {
+    padding: 2px 8px;
+    margin: 0 2px;
+    background: @button-idle;
+    color: @text-main;
+    border-radius: 0;
+    border: 1px solid @inactive-border;
+    transition: all 0.2s ease;
+}
+
+#workspaces button.active,
+#custom-ws1.active,
+#custom-ws2.active,
+#custom-ws3.active,
+#custom-ws4.active,
+#custom-ws5.active,
+#custom-ws6.active,
+#custom-ws7.active,
+#custom-ws8.active,
+#custom-ws9.active,
+#custom-ws10.active {
+    background: @button-active;
+    color: @button-active-text;
+    border-color: @active-border;
+    box-shadow: 0 2px 8px rgba(47, 145, 169, 0.22);
+}
+
+#workspaces button:hover,
+#custom-ws1:hover,
+#custom-ws2:hover,
+#custom-ws3:hover,
+#custom-ws4:hover,
+#custom-ws5:hover,
+#custom-ws6:hover,
+#custom-ws7:hover,
+#custom-ws8:hover,
+#custom-ws9:hover,
+#custom-ws10:hover,
+#mpris:hover,
+#custom-mpris-holidays:hover,
+#custom-mediactl:hover,
+#pulseaudio:hover,
+#battery:hover,
+#clock:hover,
+#tray:hover {
+    background: @bg-hover;
+    color: @text-main;
+    border-color: @active-border;
+}
+
+#workspaces button.urgent,
+#battery.critical {
+    background: rgba(198, 61, 90, 0.16);
+    color: #a52846;
+    border-color: #c63d5a;
+    font-weight: bold;
+}
+
+/* --- Module specifics --- */
+#clock {
+    font-weight: bold;
+    color: @accent-deep;
+}
+
+#mpris,
+#custom-mpris-holidays {
+    color: @accent-deep;
+    padding-right: 20px;
+}
+
+#pulseaudio { color: #23758f; }
+#battery { color: #2b8063; }
+#battery.warning { color: #a66400; }
+#battery.critical { color: #a52846; }
+
+/* --- Vivian / media applet consistency --- */
+window#com.clement.mediactl {
+    background-color: @bg-base;
+    color: @text-main;
+    border: 2px solid @active-border;
+    border-radius: 0;
+    box-shadow: 0 6px 20px rgba(22, 48, 71, 0.12);
+}
+
+#media-vbox { padding: 12px; }

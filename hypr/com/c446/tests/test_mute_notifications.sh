@@ -13,6 +13,15 @@ fail() {
 grep -Fq 'notify-mute.sh' "$BINDS" \
     || fail 'mute key must use the mute-state notifier'
 
+grep -Fq 'exec("M", "~/.config/hypr/scripts/notify-mute.sh")' "$BINDS" \
+    || fail 'MOD+M must toggle the global sink mute'
+
+grep -Fq 'exec("SHIFT + M", "~/.config/hypr/scripts/mute-focused.sh")' "$BINDS" \
+    || fail 'MOD+SHIFT+M must toggle the focused window mute'
+
+! grep -Fq 'exec("M", "~/.config/hypr/scripts/mute-focused.sh")' "$BINDS" \
+    || fail 'MOD+M must not use the focused-window mute script'
+
 ! grep -Fq 'XF86AudioMute", hl.dsp.exec_cmd("pactl set-sink-mute @DEFAULT_SINK@ toggle && ~/.config/hypr/scripts/notify-volume.sh")' "$BINDS" \
     || fail 'mute key must not use the volume notifier'
 

@@ -1,0 +1,133 @@
+/* Miyabi Light system24 fork for Discord Web.
+ * Uses the same palette/glass tokens as the Vesktop theme, without the
+ * archived Clean Discord layout that previously broke after Discord updates.
+ */
+@import url("../theme.css");
+@import url("../vesktop/miyabi-light/colors.css");
+
+@-moz-document regexp("^https?://(canary\\.|ptb\\.)?discord\\.com/.*") {
+  :root {
+    color-scheme: light;
+
+    --background-base-lowest: var(--miyabi-bg) !important;
+    --background-base-lower: var(--miyabi-surface-soft) !important;
+    --background-base-low: var(--miyabi-surface) !important;
+    --background-secondary: var(--miyabi-surface) !important;
+    --background-secondary-alt: var(--miyabi-surface-soft) !important;
+    --background-tertiary: var(--miyabi-bg) !important;
+    --background-floating: var(--miyabi-surface-strong) !important;
+    --background-modifier-hover: var(--miyabi-accent-soft) !important;
+    --background-modifier-selected: rgba(47, 145, 169, 0.24) !important;
+    --background-modifier-accent: var(--miyabi-border) !important;
+
+    --text-default: var(--miyabi-text) !important;
+    --text-normal: var(--miyabi-text) !important;
+    --text-strong: var(--miyabi-text) !important;
+    --text-subtle: var(--miyabi-text) !important;
+    --text-muted: var(--miyabi-text-muted) !important;
+    --header-primary: var(--miyabi-text) !important;
+    --header-secondary: var(--miyabi-text-muted) !important;
+    --interactive-normal: var(--miyabi-text-muted) !important;
+    --interactive-hover: var(--miyabi-text) !important;
+    --interactive-active: var(--miyabi-accent-deep) !important;
+    --interactive-muted: var(--miyabi-text-muted) !important;
+    --text-link: var(--miyabi-accent-deep) !important;
+
+    --brand-500: var(--miyabi-accent) !important;
+    --brand-560: var(--miyabi-accent-deep) !important;
+    --control-primary-background-default: var(--miyabi-accent) !important;
+    --control-primary-background-hover: var(--miyabi-accent-deep) !important;
+    --border-normal: var(--miyabi-border) !important;
+    --border-muted: var(--miyabi-border) !important;
+    --border-subtle: var(--miyabi-border) !important;
+
+    --radius-xs: 0px !important;
+    --radius-sm: 0px !important;
+    --radius-md: 0px !important;
+    --radius-lg: 0px !important;
+    --radius-xl: 0px !important;
+    --radius-round: 0px !important;
+    --unrounding: on !important;
+    --round-pfp: off !important;
+    --remove-pfp-decor: off !important;
+  }
+
+  html,
+  body,
+  #app-mount {
+    background: var(--miyabi-bg) !important;
+    color: var(--miyabi-text) !important;
+  }
+
+  [class^="bg_"],
+  [class*=" bg_"],
+  [class^="layers_"],
+  [class*=" layers_"] {
+    background: transparent !important;
+  }
+
+  [class^="sidebar_"],
+  [class*=" sidebar_"],
+  [class^="chat_"] > main,
+  [class^="membersWrap_"],
+  [class^="panels_"],
+  [class^="container_"][role="listitem"] {
+    background: var(--miyabi-surface) !important;
+    border-color: var(--miyabi-border) !important;
+    border-radius: 0 !important;
+    backdrop-filter: blur(var(--miyabi-blur));
+  }
+
+  [class^="popout_"],
+  [class^="menu_"],
+  [role="dialog"],
+  [class^="channelTextArea_"],
+  [class^="searchBar_"] {
+    background: var(--miyabi-surface-strong) !important;
+    border: 1px solid var(--miyabi-border) !important;
+    border-radius: 0 !important;
+    box-shadow: 0 10px 24px var(--miyabi-shadow) !important;
+    backdrop-filter: blur(var(--miyabi-blur));
+  }
+
+  input,
+  textarea,
+  button,
+  [class^="button_"],
+  [class*=" button_"] {
+    border-radius: 0 !important;
+  }
+
+  input::placeholder,
+  textarea::placeholder,
+  [class*="searchBar_"] [class*="placeholder_"],
+  [class*="searchBar_"] [class*="queryText_"] {
+    color: var(--miyabi-text-muted) !important;
+  }
+
+  [class^="name_"],
+  [class*=" name_"],
+  [class^="nameAndDecorators_"] {
+    color: var(--miyabi-text) !important;
+    background: transparent !important;
+  }
+
+  [class^="subText_"],
+  [class^="activity_"],
+  [class^="desc_"] {
+    color: var(--miyabi-text-muted) !important;
+  }
+
+  [class^="channel_"]:hover,
+  [class^="linkButton_"]:hover,
+  [class^="interactive_"]:hover,
+  [class^="container_"][role="listitem"]:hover {
+    background: rgba(47, 145, 169, 0.08) !important;
+  }
+
+  [class^="channel_"].selected,
+  [class^="interactive_"][aria-selected="true"],
+  [class^="container_"][role="listitem"][aria-selected="true"] {
+    background: rgba(47, 145, 169, 0.16) !important;
+  }
+}

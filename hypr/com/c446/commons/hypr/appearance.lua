@@ -15,6 +15,7 @@ hl.config({
             ignore_opacity = true,
             noise = 0.05,
             brightness = 1,
+	    popups=false,
         },
         shadow = {
             enabled = false,

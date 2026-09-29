@@ -1,11 +1,12 @@
 /* THEME: vivian — Waybar palette */
-@define-color bg-base rgba(42, 30, 48, 0.65);
-@define-color bg-hover rgba(54, 38, 59, 0.9);
+@define-color bg-base #2A1E30;
+@define-color bg-hover #36263B;
 @define-color active-border #C0AAFF;
-@define-color inactive-border rgba(64, 62, 92, 0.4);
+@define-color inactive-border #403E5C;
 @define-color text-main #ffffff;
-@define-color text-dim rgba(255, 255, 255, 0.45);
+@define-color text-dim #D7D0E6;
 
-/* Refined "Lift" colors: solid colors with very low alpha to prevent muddy stacking */
-@define-color button-idle rgba(255, 255, 255, 0.05);
-@define-color button-active rgba(192, 170, 255, 0.15);
+/* Opaque button surfaces keep controls readable over bright wallpapers. */
+@define-color button-idle #2A1E30;
+@define-color button-active #C0AAFF;
+@define-color button-active-text #2A1E30;

@@ -1,0 +1,160 @@
+/* Miyabi Light patch for upstream system24 v2.1.0 colors. */
+:root {
+    --colors: on;
+
+    --text-0: #edf5f8;
+    --text-1: #163047;
+    --text-2: #163047;
+    --text-3: #2f5166;
+    --text-4: #5e7885;
+    --text-5: #7b929d;
+
+    --bg-1: rgba(255, 255, 255, 0.90);
+    --bg-2: rgba(248, 252, 255, 0.78);
+    --bg-3: rgba(222, 239, 245, 0.72);
+    --bg-4: #edf5f8;
+
+    --hover: rgba(47, 145, 169, 0.08);
+    --active: rgba(47, 145, 169, 0.16);
+    --active-2: rgba(47, 145, 169, 0.24);
+    --message-hover: var(--hover);
+
+    --accent-1: #23758f;
+    --accent-2: #2f91a9;
+    --accent-3: #2f91a9;
+    --accent-4: #23758f;
+    --accent-5: #1f657a;
+    --accent-new: #2f91a9;
+    --mention: linear-gradient(to right, rgba(47, 145, 169, 0.12), transparent 40%);
+    --mention-hover: linear-gradient(to right, rgba(47, 145, 169, 0.06), transparent 40%);
+    --reply: linear-gradient(to right, rgba(94, 120, 133, 0.12), transparent 40%);
+    --reply-hover: linear-gradient(to right, rgba(94, 120, 133, 0.06), transparent 40%);
+
+    --online: #3d9b68;
+    --dnd: #cf5c70;
+    --idle: #c28b3c;
+    --streaming: #746fb0;
+    --offline: var(--text-4);
+
+    --border-light: rgba(43, 145, 169, 0.16);
+    --border: rgba(43, 145, 169, 0.28);
+    --border-hover: #2f91a9;
+    --button-border: rgba(43, 145, 169, 0.22);
+
+    --red-1: #df7182;
+    --red-2: #cf5c70;
+    --red-3: #b9485d;
+    --red-4: #9f3b50;
+    --red-5: #873043;
+    --green-1: #72b889;
+    --green-2: #55a873;
+    --green-3: #3d9b68;
+    --green-4: #2f8057;
+    --green-5: #246746;
+    --blue-1: #59b8cd;
+    --blue-2: #2f91a9;
+    --blue-3: #23758f;
+    --blue-4: #1f657a;
+    --blue-5: #185368;
+    --yellow-1: #d6ab5b;
+    --yellow-2: #c28b3c;
+    --yellow-3: #a8752d;
+    --yellow-4: #8e6124;
+    --yellow-5: #754f1d;
+    --purple-1: #8e88c8;
+    --purple-2: #746fb0;
+    --purple-3: #5e5998;
+    --purple-4: #4d4880;
+    --purple-5: #3e3a68;
+
+    /* Current Discord token aliases used by the web UI. */
+    --text-default: #163047;
+    --text-muted: #5e7885;
+    --text-link: #23758f;
+    --interactive-normal: #2f5166;
+    --interactive-hover: #163047;
+    --interactive-active: #23758f;
+    --interactive-muted: #7b929d;
+    --input-background: rgba(255, 255, 255, 0.72);
+    --input-placeholder-text: #5e7885;
+    --background-modifier-hover: rgba(47, 145, 169, 0.08);
+    --background-modifier-selected: rgba(47, 145, 169, 0.16);
+}
+
+/* Midnight scopes these variables to .visual-refresh; keep its light surface
+   graph from overriding Miyabi when Discord refreshes the app shell. */
+body,
+.visual-refresh {
+    --app-frame-background: var(--bg-4) !important;
+    --app-frame-border: var(--border) !important;
+    --app-message-embed-secondary-text: var(--text-3) !important;
+    --background-accent: var(--bg-3) !important;
+    --background-base-low: var(--bg-4) !important;
+    --background-base-lower: var(--bg-4) !important;
+    --background-base-lowest: var(--bg-4) !important;
+    --background-brand: var(--accent-2) !important;
+    --background-code: var(--bg-3) !important;
+    --background-floating: var(--bg-1) !important;
+    --background-mod-muted: var(--hover) !important;
+    --background-mod-normal: var(--bg-2) !important;
+    --background-mod-strong: var(--bg-1) !important;
+    --background-mod-subtle: var(--hover) !important;
+    --background-primary: var(--bg-4) !important;
+    --background-secondary: var(--bg-2) !important;
+    --background-secondary-alt: var(--bg-3) !important;
+    --background-surface-high: var(--bg-2) !important;
+    --background-surface-higher: var(--bg-1) !important;
+    --background-surface-highest: var(--bg-1) !important;
+    --background-tertiary: var(--bg-4) !important;
+    --background-scrim: rgba(22, 48, 71, 0.24) !important;
+    --background-scrim-lightbox: rgba(22, 48, 71, 0.44) !important;
+    --chat-background: var(--bg-4) !important;
+    --chat-background-default: var(--bg-4) !important;
+    --chat-border: var(--border) !important;
+    --chat-text-muted: var(--text-4) !important;
+    --channel-icon: var(--text-3) !important;
+    --channel-text-area-placeholder: var(--text-4) !important;
+    --channels-default: var(--text-3) !important;
+    --channeltextarea-background: var(--bg-1) !important;
+    --control-primary-background-active: var(--accent-5) !important;
+    --control-primary-background-default: var(--accent-3) !important;
+    --control-primary-background-hover: var(--accent-4) !important;
+    --control-primary-text-active: var(--text-0) !important;
+    --control-primary-text-default: var(--text-0) !important;
+    --control-primary-text-hover: var(--text-0) !important;
+    --icon-default: var(--text-3) !important;
+    --icon-muted: var(--text-4) !important;
+    --icon-strong: var(--text-2) !important;
+    --icon-subtle: var(--text-3) !important;
+    --input-background-default: var(--bg-1) !important;
+    --input-foreground-placeholder: var(--text-4) !important;
+    --input-icon-default: var(--text-3) !important;
+    --input-placeholder-text-default: var(--text-4) !important;
+    --input-text-default: var(--text-1) !important;
+    --interactive-background-active: var(--active) !important;
+    --interactive-background-hover: var(--hover) !important;
+    --interactive-background-selected: var(--active) !important;
+    --interactive-icon-active: var(--text-2) !important;
+    --interactive-icon-default: var(--text-3) !important;
+    --interactive-icon-hover: var(--text-2) !important;
+    --interactive-muted: var(--text-4) !important;
+    --interactive-text-active: var(--text-2) !important;
+    --interactive-text-default: var(--text-3) !important;
+    --interactive-text-hover: var(--text-1) !important;
+    --modal-background: var(--bg-1) !important;
+    --modal-footer-background: var(--bg-2) !important;
+    --text-brand: var(--accent-1) !important;
+    --text-default: var(--text-1) !important;
+    --text-link: var(--accent-1) !important;
+    --text-muted: var(--text-4) !important;
+    --text-normal: var(--text-1) !important;
+    --text-strong: var(--text-1) !important;
+    --text-subtle: var(--text-3) !important;
+    --header-primary: var(--text-1) !important;
+    --header-secondary: var(--text-3) !important;
+    --brand-260: var(--accent-2) !important;
+    --brand-360: var(--accent-2) !important;
+    --brand-500: var(--accent-2) !important;
+    --white: var(--text-0) !important;
+    --white-500: var(--text-0) !important;
+}

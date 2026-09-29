@@ -1,0 +1,86 @@
+/* Miyabi Light — blue/teal liquid-glass Spotify adapter. */
+
+body,
+#main,
+.Root__main-view,
+.Root__main-view main,
+.Root__main-view .os-viewport {
+  background: var(--spice-main) !important;
+  color: var(--spice-text) !important;
+}
+
+.Root__nav-bar,
+.Root__now-playing-bar,
+.Root__top-container,
+.main-topBar-background {
+  background: var(--spice-player) !important;
+  border-color: var(--spice-button) !important;
+  box-shadow: 0 8px 24px rgba(22, 48, 71, .10) !important;
+}
+
+.Root__nav-bar,
+.Root__now-playing-bar,
+.main-card-card,
+.main-home-homeHeader,
+.main-trackList-trackListRow,
+.main-entityHeader-container {
+  border-radius: 0 !important;
+}
+
+.main-card-card,
+.main-home-homeHeader,
+.main-entityHeader-container,
+.main-trackList-trackListRow:hover,
+.main-trackList-trackListRow.main-trackList-trackListRowSelected {
+  background: var(--spice-card) !important;
+  border: 1px solid rgba(47, 145, 169, .22) !important;
+}
+
+.main-entityHeader-background,
+.main-entityHeader-backgroundColor,
+.main-entityHeader-backgroundOverColorGradient,
+.main-entityHeader-gradient,
+.main-actionBarBackground-background {
+  background: var(--spice-main) !important;
+  background-image: none !important;
+}
+
+.main-playButton-PlayButton,
+.main-buttons-button,
+button,
+[role="button"] {
+  border-radius: 0 !important;
+}
+
+.main-playButton-PlayButton,
+.progress-bar__fg,
+.x-progressBar-fillColor,
+.x-toggle-indicatorWrapper {
+  background-color: var(--spice-button) !important;
+}
+
+.main-playButton-PlayButton:hover,
+button:hover,
+[role="button"]:hover {
+  background-color: var(--spice-button-active) !important;
+}
+
+.x-searchInput-searchInputInput,
+input {
+  background: var(--spice-player) !important;
+  border: 1px solid rgba(47, 145, 169, .28) !important;
+  border-radius: 0 !important;
+  color: var(--spice-text) !important;
+}
+
+.main-image-image,
+.main-entityHeader-imageContainer img,
+.main-trackList-rowImage,
+.cover-art {
+  border-radius: 0 !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--spice-button) !important;
+  border-radius: 0 !important;
+}

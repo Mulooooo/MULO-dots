@@ -1,0 +1,164 @@
+:root {
+  /* Miyabi light / blue-teal glass palette */
+  color-scheme: light !important;
+  --tf-bg: #edf5f8 !important;
+  --tf-bg-alt: rgba(255, 255, 255, 0.9) !important;
+  --tf-accent: #2f91a9 !important;
+  --tf-text: #163047 !important;
+  --tf-text-muted: #5e7885 !important;
+  --tf-border: rgba(47, 145, 169, 0.28) !important;
+  --tf-border-width: 1px !important;
+  --tf-rounding: 0px !important;
+  --tf-font-family: "MesloLGL Nerd Font Mono" !important;
+
+  /* Firefox chrome colors */
+  --toolbar-bgcolor: var(--tf-bg) !important;
+  --toolbar-color: var(--tf-text) !important;
+  --lwt-accent-color: var(--tf-bg) !important;
+  --lwt-text-color: var(--tf-text) !important;
+  --lwt-selected-tab-background-color: var(--tf-bg-alt) !important;
+  --toolbar-field-background-color: rgba(255, 255, 255, 0.72) !important;
+  --toolbar-field-color: var(--tf-text) !important;
+  --toolbar-field-focus-background-color: rgba(255, 255, 255, 0.94) !important;
+  --toolbar-field-focus-color: var(--tf-text) !important;
+  --sidebar-background-color: rgba(248, 252, 255, 0.78) !important;
+  --sidebar-text-color: var(--tf-text) !important;
+  --arrowpanel-background: var(--tf-bg-alt) !important;
+  --arrowpanel-color: var(--tf-text) !important;
+  --arrowpanel-border-color: var(--tf-border) !important;
+
+  /* TextFox and new-tab mappings */
+  --textfox-bg-color: var(--tf-bg) !important;
+  --textfox-tab-active-bg: rgba(47, 145, 169, 0.18) !important;
+  --textfox-accent-color: var(--tf-accent) !important;
+  --newtab-background-color: var(--tf-bg) !important;
+  --newtab-background-color-secondary: var(--tf-bg-alt) !important;
+  --newtab-text-primary-color: var(--tf-text) !important;
+  --newtab-text-topic-label-color: var(--tf-accent) !important;
+  --newtab-text-secondary-text: var(--tf-text-muted) !important;
+  --urlbarView-highlight-background: rgba(47, 145, 169, 0.18) !important;
+  --urlbarView-highlight-color: var(--tf-text) !important;
+  --autocomplete-popup-highlight-background: rgba(47, 145, 169, 0.18) !important;
+  --autocomplete-popup-highlight-color: var(--tf-text) !important;
+  --tab-selected-bgcolor: rgba(47, 145, 169, 0.18) !important;
+  --tab-hover-background-color: rgba(47, 145, 169, 0.1) !important;
+}
+
+/* Keep the browser canvas light while chrome surfaces stay translucent. */
+#navigator-toolbox,
+#TabsToolbar,
+#nav-bar,
+#PersonalToolbar,
+#sidebar-box,
+box#vertical-tabs,
+#tabbrowser-tabbox {
+  background: var(--tf-bg) !important;
+  color: var(--tf-text) !important;
+}
+
+#nav-bar,
+#PersonalToolbar,
+#sidebar-box,
+box#vertical-tabs,
+#tabbrowser-tabbox,
+#urlbar-background {
+  background-color: var(--tf-bg-alt) !important;
+  background-image: none !important;
+  backdrop-filter: blur(24px);
+}
+
+#urlbar-background {
+  border: 1px solid var(--tf-border) !important;
+  border-radius: 0 !important;
+  box-shadow: 0 4px 18px rgba(22, 48, 71, 0.08) !important;
+}
+
+#urlbar[focused] > #urlbar-background {
+  border-color: var(--tf-accent) !important;
+  box-shadow: 0 0 0 2px rgba(47, 145, 169, 0.18),
+    0 4px 18px rgba(22, 48, 71, 0.08) !important;
+}
+
+#urlbar-input,
+#urlbar-scheme {
+  color: var(--tf-text) !important;
+}
+
+.urlbarView {
+  background: var(--tf-bg-alt) !important;
+  color: var(--tf-text) !important;
+  box-shadow: 0 10px 24px rgba(22, 48, 71, 0.12) !important;
+  backdrop-filter: blur(24px);
+}
+
+/* Tabs: retain the shared vertical-tab layout and style both orientations. */
+#TabsToolbar .tab-background,
+box#vertical-tabs .tab-background,
+.tabbrowser-tab .tab-background {
+  border-radius: 0 !important;
+  color: var(--tf-text) !important;
+}
+
+#TabsToolbar .tab-background:is([selected], [multiselected]),
+box#vertical-tabs .tab-background:is([selected="true"], [selected], [multiselected]),
+.tab-background[selected="true"] {
+  background: var(--textfox-tab-active-bg) !important;
+  box-shadow: inset 2px 0 0 var(--tf-accent) !important;
+}
+
+#TabsToolbar .tabbrowser-tab:hover > .tab-stack > .tab-background:not([selected], [multiselected]),
+box#vertical-tabs .tabbrowser-tab:hover .tab-background:not([selected], [multiselected]) {
+  background: var(--tab-hover-background-color) !important;
+}
+
+.tab-label,
+.tab-icon-image {
+  color: var(--tf-text) !important;
+}
+
+/* Sidebar and panels */
+#sidebar,
+#sidebar-main,
+.tools-and-extensions,
+menupopup,
+panel {
+  background: var(--tf-bg-alt) !important;
+  color: var(--tf-text) !important;
+  backdrop-filter: blur(24px);
+}
+
+/* New-tab search, shortcuts, and history cards. */
+@-moz-document url("about:home"), url("about:newtab") {
+  body,
+  .outer-wrapper,
+  .ds-outer-wrapper-breakpoint-override {
+    background-color: var(--tf-bg) !important;
+    background-image: none !important;
+    color: var(--tf-text) !important;
+  }
+
+  .search-wrapper .search-handoff-button,
+  .search-wrapper input,
+  .top-site-outer .tile,
+  .card-outer {
+    background: var(--tf-bg-alt) !important;
+    color: var(--tf-text) !important;
+    border: 1px solid var(--tf-border) !important;
+    border-radius: 0 !important;
+    box-shadow: 0 6px 18px rgba(22, 48, 71, 0.08) !important;
+    backdrop-filter: blur(24px);
+  }
+
+  .search-wrapper .search-handoff-button:hover,
+  .search-wrapper input:hover,
+  .top-site-outer .tile:hover,
+  .card-outer:hover {
+    border-color: var(--tf-accent) !important;
+    background: rgba(255, 255, 255, 0.96) !important;
+  }
+
+.search-wrapper .search-handoff-button,
+  .search-wrapper input {
+    color: var(--tf-text) !important;
+  }
+}

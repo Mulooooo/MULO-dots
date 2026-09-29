@@ -1,0 +1,12 @@
+/**
+ * @name system24 2.1.0 / Miyabi Light
+ * @description system24 with Miyabi's light liquid-glass palette.
+ * @version 2.1.0-miyabi.1
+ * @source https://github.com/refact0r/system24
+ */
+
+/* Upstream system24 is vendored; local files are the Miyabi patch set. */
+@import url("./upstream/system24.theme.css");
+@import url("./miyabi-light/options.css");
+@import url("./miyabi-light/colors.css");
+@import url("./miyabi-light/glass.css");

@@ -18,7 +18,7 @@ end
 local function move_workspace_bind(modifiers, key, workspace)
     local prefix = main_mod
     if modifiers ~= "" then prefix = prefix .. " + " .. modifiers end
-    hl.bind(prefix .. " + " .. key, hl.dsp.window.move({ workspace = workspace }))
+    hl.bind(prefix .. " + " .. key, hl.dsp.window.move({ workspace = workspace, follow = false }))
 end
 
 for workspace = 1, 10 do
@@ -56,19 +56,25 @@ bind("Q", hl.dsp.window.close())
 bind("SHIFT + SPACE", hl.dsp.window.float({ action = "toggle" }))
 exec("SHIFT + Y", "~/.config/hypr/scripts/record.zsh")
 
-for key, direction in pairs({ LEFT = "l", RIGHT = "r", UP = "u", DOWN = "d" }) do
+for key, direction in pairs({
+    LEFT = "l", RIGHT = "r", UP = "u", DOWN = "d",
+    H = "l", J = "d", K = "u", L = "r",
+}) do
     bind(key, hl.dsp.focus({ direction = direction }))
     bind("SHIFT + " .. key, hl.dsp.window.move({ direction = direction }))
 end
 
 bind("SPACE", hl.dsp.layout("swapwithmaster"))
-bind("H", hl.dsp.layout("togglesplit"))
+-- Master layout does not use the dwindle-only togglesplit message.
 bind("D", hl.dsp.layout("addmaster"))
 bind("SHIFT + D", hl.dsp.layout("removemaster"))
 
 bind("R", hl.dsp.submap("arrange"))
 hl.define_submap("arrange", function()
-    for key, direction in pairs({ LEFT = "l", RIGHT = "r", UP = "u", DOWN = "d" }) do
+    for key, direction in pairs({
+        LEFT = "l", RIGHT = "r", UP = "u", DOWN = "d",
+        H = "l", J = "d", K = "u", L = "r",
+    }) do
         hl.bind(key, hl.dsp.focus({ direction = direction }))
         hl.bind("SHIFT + " .. key, hl.dsp.window.move({ direction = direction }))
     end
@@ -85,18 +91,30 @@ end)
 
 bind("W", hl.dsp.submap("wallpaper"))
 hl.define_submap("wallpaper", function()
-    local wallpapers = { ["code:10"] = 1, ["code:11"] = 2, ["code:12"] = 9, ["code:13"] = 6, ["code:14"] = 8, ["code:15"] = 7, ["code:16"] = 5, ["code:17"] = 4, ["code:18"] = 3, ["code:19"] = 10 }
+    -- SUPER+W, then the top-row number key selects the matching wallpaper slot.
+    local wallpapers = {
+        ["code:10"] = 1,
+        ["code:11"] = 2,
+        ["code:12"] = 3,
+        ["code:13"] = 4,
+        ["code:14"] = 5,
+        ["code:15"] = 6,
+        ["code:16"] = 7,
+        ["code:17"] = 8,
+        ["code:18"] = 9,
+        ["code:19"] = 10,
+    }
     for key, wallpaper in pairs(wallpapers) do
-        hl.bind(key, hl.dsp.exec_cmd("~/.config/hypr/scripts/set_wallpaper.sh " .. wallpaper))
+        hl.bind(key, hl.dsp.exec_cmd("~/.config/hypr/scripts/set_wallpaper.sh " .. wallpaper .. " --focused"))
     end
     hl.bind("ESCAPE", hl.dsp.submap("reset"))
     hl.bind("RETURN", hl.dsp.submap("reset"))
 end)
 
 bind("SHIFT + X", hl.dsp.exec_cmd("hyprlock"))
-exec("M", "~/.config/hypr/scripts/mute-focused.sh")
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("pactl set-sink-volume @DEFAULT_SINK@ +5% && ~/.config/i3/notify-volume.sh"), { repeating = true })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("pactl set-sink-volume @DEFAULT_SINK@ -5% && ~/.config/hypr/scripts/notify-volume.sh"), { repeating = true })
+exec("M", "~/.config/hypr/scripts/notify-mute.sh")
+exec("SHIFT + M", "~/.config/hypr/scripts/mute-focused.sh")
+-- The Razer BlackWidow Elite volume wheel is faulty; leave its events inert.
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("~/.config/hypr/scripts/notify-mute.sh"), { locked = true })
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl set +5% && ~/.config/hypr/scripts/notify-brightness.sh"), { repeating = true })
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 5%- && ~/.config/hypr/scripts/notify-brightness.sh"), { repeating = true })
@@ -109,13 +127,12 @@ exec("PRINT", 'grimblast --notify copysave output "$HOME/Pictures/screenshot/$(d
 hl.bind("Print", hl.dsp.exec_cmd("c"))
 exec("HOME", "grimblast copy active")
 
-    bind("code:18", hl.dsp.focus({ workspace = 9 }))
-exec("P", "~/.config/hypr/scripts/start-hdmi.sh")
-exec("SHIFT + P", "~/.config/hypr/scripts/cycle-hdmi-mode.sh")
-hl.bind(main_mod .. " + code:18", hl.dsp.focus({ monitor = "HDMI-A-1" }))
+bind("P", function()
+    hl.dispatch(hl.dsp.window.float({ action = "set" }))
+    hl.dispatch(hl.dsp.window.pin({ action = "toggle" }))
+end)
+exec("CTRL + P", "~/.config/hypr/scripts/monitor-manager.sh recover")
+exec("SHIFT + P", "~/.config/hypr/scripts/monitor-manager.sh mode-next")
+exec("ALT + P", "~/.config/hypr/scripts/monitor-manager.sh mirror-toggle")
 
-exec("H", "playerctl -p spotify previous")
-hl.bind(main_mod .. " + J", hl.dsp.exec_cmd("playerctl -p spotify volume 0.1-"), { repeating = true })
-hl.bind(main_mod .. " + K", hl.dsp.exec_cmd("playerctl -p spotify volume 0.1+"), { repeating = true })
 exec("SHIFT + V", "~/.config/hypr/scripts/round-robin-paste.sh")
-exec("L", "playerctl -p spotify next")
