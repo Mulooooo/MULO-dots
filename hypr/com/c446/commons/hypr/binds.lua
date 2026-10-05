@@ -40,6 +40,8 @@ hl.bind(main_mod .. " + SHIFT + E", hl.dsp.exit())
 exec("RETURN", "kitty")
 exec("E", "kitty yazi")
 exec("S", "rofi -show drun")
+exec("COMMA", "noctalia msg settings-toggle")
+exec("W", "noctalia msg panel-toggle wallpaper")
 exec("A", "rofi -show window")
 exec("SEMICOLON", "rofi -show emoji")
 exec("Z", "rofi -modi emoji -show emoji -emoji-text | wl-copy")
@@ -47,8 +49,6 @@ bind("F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
 exec("SHIFT + T", "~/.config/hypr/scripts/hypr_mono.sh")
 exec("SHIFT + G", "~/.config/hypr/scripts/transparency.sh")
 exec("G", "~/.config/hypr/scripts/gamemode.sh")
-exec("C", "~/.config/hypr/scripts/toggle-cursor.sh")
-
 exec("code:67", "~/.config/hypr/scripts/set-power-profile.sh performance")
 exec("code:68", "~/.config/hypr/scripts/set-power-profile.sh quiet")
 exec("code:69", "~/.config/hypr/scripts/set-power-profile.sh balanced")
@@ -85,28 +85,6 @@ hl.define_submap("arrange", function()
     hl.bind("SPACE", hl.dsp.layout("swapwithmaster"))
     hl.bind("A", hl.dsp.layout("addmaster"))
     hl.bind("D", hl.dsp.layout("removemaster"))
-    hl.bind("ESCAPE", hl.dsp.submap("reset"))
-    hl.bind("RETURN", hl.dsp.submap("reset"))
-end)
-
-bind("W", hl.dsp.submap("wallpaper"))
-hl.define_submap("wallpaper", function()
-    -- SUPER+W, then the top-row number key selects the matching wallpaper slot.
-    local wallpapers = {
-        ["code:10"] = 1,
-        ["code:11"] = 2,
-        ["code:12"] = 3,
-        ["code:13"] = 4,
-        ["code:14"] = 5,
-        ["code:15"] = 6,
-        ["code:16"] = 7,
-        ["code:17"] = 8,
-        ["code:18"] = 9,
-        ["code:19"] = 10,
-    }
-    for key, wallpaper in pairs(wallpapers) do
-        hl.bind(key, hl.dsp.exec_cmd("~/.config/hypr/scripts/set_wallpaper.sh " .. wallpaper .. " --focused"))
-    end
     hl.bind("ESCAPE", hl.dsp.submap("reset"))
     hl.bind("RETURN", hl.dsp.submap("reset"))
 end)

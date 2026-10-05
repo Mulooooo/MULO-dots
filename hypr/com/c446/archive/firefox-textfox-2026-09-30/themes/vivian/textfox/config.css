@@ -1,0 +1,52 @@
+:root {
+    /* --- Mapping Vesktop OKLCH to TextFox --- */
+    --tf-bg: #2A283C !important;      /* Matching --bg-4 */
+    --tf-bg-alt: oklch(28.892% 0.06103 290.146) !important;  /* Matching --bg-3 */
+    --tf-accent: oklch(78% 0.10 290) !important;            /* Matching --accent-1 */
+    --tf-text: oklch(95% 0 0) !important;                   /* Matching --text-1 */
+    --tf-text-muted: oklch(58% 0 0) !important;             /* Matching --text-4 */
+    --tf-font-family: "MesloLGL Nerd Font Mono" !important;
+
+    /* Newtab / Internal Overwrites */
+    --newtab-background-color: var(--tf-bg) !important;
+    --newtab-background-color-secondary: var(--tf-bg-alt) !important;
+    --newtab-text-primary-color: var(--tf-text) !important;
+    --newtab-text-topic-label-color: var(--tf-accent) !important;
+    --newtab-text-secondary-text: var(--tf-text-muted) !important;
+    
+    /* TextFox Variable Mapping */
+    --textfox-bg-color: var(--tf-bg) !important;
+    --textfox-tab-active-bg: var(--tf-bg-alt) !important;
+    --textfox-accent-color: var(--tf-accent) !important;
+}
+
+/* --- UI Depth Layers --- */
+
+/* The main toolbar (Urlbar area) matches the panel/gutter depth */
+#nav-bar, #urlbar-background {
+    background-color: oklch(28.892% 0.06103 290.146) !important; 
+}
+
+/* The tab strip matches the deepest layer */
+#TabsToolbar {
+    background-color: var(--tf-bg) !important;
+}
+
+/* Active tab highlight using your Accent 3 */
+.tab-background[selected="true"] {
+    background-color: oklch(75% 0.12 300 / 0.2) !important;
+    border-top: 2px solid var(--tf-accent) !important;
+}
+
+/* URL bar focus glow */
+#urlbar[focused] > #urlbar-background {
+    outline: 1px solid var(--tf-accent) !important;
+}
+
+.top-sites {
+    display: none;
+}
+
+.logo-and-wordmark{
+    padding-block-end: 2rem;
+}

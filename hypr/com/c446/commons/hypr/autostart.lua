@@ -3,13 +3,11 @@ local commands = {
     "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE",
     "systemctl --user start hyprland-session.target",
     "systemctl --user start xdg-desktop-portal-hyprland",
-    "systemctl --user restart dunst",
     "systemctl start platform-profile@balanced-performance.service",
-    "swww-daemon",
-    "~/.config/hypr/scripts/wallpaper.sh",
-    "~/.config/hypr/scripts/apply-theme.sh",
+    "systemctl --user daemon-reload",
+    "systemctl --user start dunst.service",
+    "noctalia --daemon",
     "waybar",
-    "~/.config/hypr/scripts/set_wallpaper.sh",
     "~/.config/hypr/scripts/monitor-manager.sh apply",
 }
 

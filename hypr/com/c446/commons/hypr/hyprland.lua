@@ -2,7 +2,6 @@
 -- Hyprland 0.55+ loads this file as the compositor configuration.
 
 require("env")
-require("theme")
 require("monitors")
 require("appearance")
 require("input")
@@ -28,3 +27,4 @@ hl.config({
         no_hardware_cursors = true,
     },
 })
+

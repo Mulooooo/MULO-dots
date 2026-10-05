@@ -6,6 +6,5 @@ __pycache__/
 *.bak
 *.bak2
 
-# Generated active theme tree (built by theme-switch.sh)
+# Retired c446-generated app tree; user configs are detached.
 hypr/com/c446/active/
-hypr/com/c446/commons/textfox/icons/

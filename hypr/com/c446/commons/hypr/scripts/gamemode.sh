@@ -20,14 +20,12 @@ if [ "$ANIMATIONS" = 1 ]; then
         keyword decoration:rounding 0;\
         keyword general:gaps_in 0;\
         keyword general:gaps_out 0"
-    killall waybar 2>/dev/null
     "$SCRIPT_DIR/set-power-profile.sh" performance --silent
     dunstify -a Gamemode -r "$DUNST_ID" -u normal -i controller \
         "Gamemode Enabled" "Effects off · Performance profile"
 else
     # --- Disable gamemode ---
     hyprctl reload
-    waybar &
     "$SCRIPT_DIR/set-power-profile.sh" balanced --silent
     dunstify -a Gamemode -r "$DUNST_ID" -u normal -i display \
         "Gamemode Disabled" "Effects restored · Balanced profile"
